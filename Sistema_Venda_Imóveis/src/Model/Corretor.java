@@ -4,10 +4,10 @@ package Model;
 import java.io.Serializable;
 import java.util.*;
 
-public class Corretor implements Serializable{
+public  abstract class Corretor implements Serializable{
     private String nome; // nome do corretor.
     private int NumCRECI; // número do orgão CRECI (5 digitos).
-    
+    ArrayList<Venda> vendas = new ArrayList<Venda>();
 
     public Corretor(String nome, int NumCRECI) {
         this.nome = nome;
@@ -18,16 +18,10 @@ public class Corretor implements Serializable{
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public int getNumCRECI() {
         return NumCRECI;
     }
-
-    public void setNumCRECI(int NumCRECI) {
-        this.NumCRECI = NumCRECI;
-    }
+    
+    public abstract float calculaSalario(Date pData);
     
 }

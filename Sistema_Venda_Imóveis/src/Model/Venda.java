@@ -2,50 +2,35 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Venda implements Serializable{
     private float valorDaVenda; // valor que foi vendido o imovel.
     private String nomeComprador; // nome do comprador.
-    private int dataDaVenda; // data que foi vendido o imovel.
-    private String nomeCorretorVenda; // nome do corretor que vendeu o imovel.
+    private Date dataVenda; // data que foi vendido o imovel.
+    private String corretorResponsavel; // nome do corretor que vendeu o imovel.
 
-    public Venda(float valorDaVenda, String nomeComprador, int dataDaVenda, String nomeCorretorVenda) {
+    public Venda(float valorDaVenda, String nomeComprador, Date dataVenda, String corretorResponsavel) {
         this.valorDaVenda = valorDaVenda;
         this.nomeComprador = nomeComprador;
-        this.dataDaVenda = dataDaVenda;
-        this.nomeCorretorVenda = nomeCorretorVenda;
+        this.dataVenda = dataVenda;
+        this.corretorResponsavel = corretorResponsavel;
     }
 
     public float getValorDaVenda() {
         return valorDaVenda;
     }
 
-    public void setValorDaVenda(float valorDaVenda) {
-        this.valorDaVenda = valorDaVenda;
-    }
-
     public String getNomeComprador() {
         return nomeComprador;
     }
 
-    public void setNomeComprador(String nomeComprador) {
-        this.nomeComprador = nomeComprador;
+    public Date getDataVenda() {
+        return dataVenda;
     }
 
-    public int getDataDaVenda() {
-        return dataDaVenda;
+    public String getCorretorResponsavel() {
+        return corretorResponsavel;
     }
-
-    public void setDataDaVenda(int dataDaVenda) {
-        this.dataDaVenda = dataDaVenda;
-    }
-
-    public String getNomeCorretorVenda() {
-        return nomeCorretorVenda;
-    }
-
-    public void setNomeCorretorVenda(String nomeCorretorVenda) {
-        this.nomeCorretorVenda = nomeCorretorVenda;
-    }
-    
+       
 }

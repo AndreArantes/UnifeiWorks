@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Imovel implements Serializable{
 
@@ -8,53 +9,41 @@ public class Imovel implements Serializable{
     private int codigo; // código do imovel.
     private String descricao; // descrição da casa.
     private String nomeProprietario; // nome do vendedor(proprietário).
-    private float valorRequerido; // valor que o proprietário quer na casa.
-    private int dataCadastro; // deixar a data livre para digitação.
-    
-  
+    private float valorRequerido; // valor que o proprietário quer no imóvel.
+    private Date dataCadastro; // deixar a data livre para digitação.
 
-    public void setTipo(String tipo) {
+    public Imovel(String tipo, int codigo, String descricao, String nomeProprietario, float valorRequerido, Date dataCadastro) {
         this.tipo = tipo;
+        this.codigo = codigo;
+        this.descricao = descricao;
+        this.nomeProprietario = nomeProprietario;
+        this.valorRequerido = valorRequerido;
+        this.dataCadastro = dataCadastro;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 
     public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
     public String getDescricao() {
         return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public String getNomeProprietario() {
         return nomeProprietario;
     }
 
-    public void setNomeProprietario(String nomeProprietario) {
-        this.nomeProprietario = nomeProprietario;
-    }
-
     public float getValorRequerido() {
         return valorRequerido;
     }
 
-    public void setValorRequerido(float valorRequerido) {
-        this.valorRequerido = valorRequerido;
-    }
-
-    public int getDataCadastro() {
+    public Date getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(int dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
+    
 }
