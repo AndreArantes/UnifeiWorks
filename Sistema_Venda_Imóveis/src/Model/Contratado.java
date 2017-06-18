@@ -31,18 +31,4 @@ public class Contratado extends Corretor implements Serializable{
         return percentualVenda;
     }
 
-    
-    public float calculaSalario(Date pData) {
-       float salario = 0; 
-       
-       for(int idx = 0; idx < vendas.size(); idx++){
-           Venda objVenda = (Venda) vendas.get(idx);
-           
-           if((objVenda.getDataVenda()).equals(pData)){
-               salario += (float) salario + (objVenda.getValorDaVenda() * percentualVenda);
-           }
-       }
-           
-    return salario + salarioFixo;
-    }
 }

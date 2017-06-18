@@ -1,6 +1,6 @@
 
 package Controller;
 
-public class ctrContratado {
+public class limPrincipal {
     
 }
