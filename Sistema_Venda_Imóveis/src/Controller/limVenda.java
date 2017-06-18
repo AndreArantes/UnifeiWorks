@@ -20,4 +20,12 @@ public class limVenda {
     public void listaVendas(String lista){
         JOptionPane.showMessageDialog(null, lista);
     }
+    
+    public void imprimeFaturamento(float vFaturamento){
+        JOptionPane.showMessageDialog(null,"O valor do faturamneto é de: R$" + vFaturamento + "\n");
+    }
+    
+        public void imprimeLucro(float vLucro){
+        JOptionPane.showMessageDialog(null,"O valor do lucro é de: R$" + vLucro + "\n");
+    }
 }

@@ -1,6 +1,7 @@
 
 package Controller;
 
+import Model.Corretor;
 import Model.Venda;
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,9 +14,11 @@ import java.util.Date;
 import java.util.Vector;
 
 public class ctrVenda {
-    
+
     private limVenda objALimVenda = new limVenda();
     private Venda objAEntVenda;
+    private ctrPrincipal objCtrPrincipal;
+    private Vector listaCorretores = objCtrPrincipal.getObjACtrCorretor().getListaCorretor();
     private String[] aDadosForm;
     private Vector vecAVendas = new Vector();
     private final String arquivo = "disc.dat";
@@ -25,14 +28,14 @@ public class ctrVenda {
         desserializaVenda();
     }
 
-    public boolean cadDisciplina() throws ParseException {
+    public boolean cadVenda() throws ParseException {
         cadastra();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(aDadosForm[2]);
-        objAEntVenda = new Venda(Integer.parseInt(aDadosForm[0]),Float.parseFloat(aDadosForm[1]),aDadosForm[2], data ,aDadosForm[4]);
+        objAEntVenda = new Venda(Integer.parseInt(aDadosForm[0]), Float.parseFloat(aDadosForm[1]), aDadosForm[2], data, aDadosForm[4]);
         addVetor(objAEntVenda);
-        
-    return true;
+
+        return true;
     }
 
     private void cadastra() {
@@ -64,25 +67,83 @@ public class ctrVenda {
         }
     }
 
-    public Vector getListaDisciplinas() {
+    public Vector getListaVendas() {
         return vecAVendas;
     }
-    
-    public void imprimeListaVendas(){
-        String result="Lista de Vendas:\n";
-        
-        for(int idx = 0; idx<vecAVendas.size(); idx++){
+
+    public void imprimeListaVendas() {
+        String result = "Lista de Vendas:\n";
+
+        for (int idx = 0; idx < vecAVendas.size(); idx++) {
             Venda objDisc = (Venda) vecAVendas.get(idx);
-            result +=  "Valor: R$" + objDisc.getValorDaVenda()
-                       +" || Comprador: " + objDisc.getNomeComprador()
-                       +" || Data: " + objDisc.getDataVenda()
-                       +" || Corretor: " + objDisc.getCorretorResponsavel()
-                       +"\n";
+            result += "Valor: R$" + objDisc.getValorDaVenda()
+                    + " || Comprador: " + objDisc.getNomeComprador()
+                    + " || Data: " + objDisc.getDataVenda()
+                    + " || Corretor: " + objDisc.getCorretorResponsavel()
+                    + "\n";
         }
-        
-        objALimVenda.listaVendas(result);    
+
+        objALimVenda.listaVendas(result);
+    }
+
+    public void calculaFaturamento(String pMes) {
+        float faturamento = 0;
+
+        for (int idx = 0; idx < vecAVendas.size(); idx++) {
+            Venda objVenda = (Venda) vecAVendas.get(idx);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("MM");
+            String mes = sdf.format(objVenda.getDataVenda());
+            
+            if (mes.equalsIgnoreCase(pMes)) {
+                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+            }
+        }
+
+        objALimVenda.imprimeFaturamento(faturamento);
     }
     
+        public float calculaFaturamentoCorretor(Corretor objCorretor, String pMes) {
+        float faturamento = 0;
+
+        for (int idx = 0; idx < vecAVendas.size(); idx++) {
+            Venda objVenda = (Venda) vecAVendas.get(idx);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("MM");
+            String mes = sdf.format(objVenda.getDataVenda());
+            
+            if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(objCorretor)){
+                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+            }
+        }
+
+    return faturamento;
+    }
+
+    public void calculaLucro(String pMes) {
+        float lucro = 0;
+
+        for (int idx = 0; idx < vecAVendas.size(); idx++) {
+            Venda objVenda = (Venda) vecAVendas.get(idx);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("MM");
+            String mes = sdf.format(objVenda.getDataVenda());
+            
+            if (mes.equalsIgnoreCase(pMes)) {
+                lucro += (objVenda.getValorDaVenda() * 5) / 100;
+            }
+        }
+
+        for (int idx = 0; idx < listaCorretores.size(); idx++) {
+            Corretor objCorretor = (Corretor) listaCorretores.get(idx);
+
+            lucro -= objCtrPrincipal.getObjACtrCorretor().calculaSalario(objCorretor,pMes);
+
+        }
+
+        objALimVenda.imprimeLucro(lucro);
+    }
+
     public void finalize() throws Exception {
         serializaVenda();
     }

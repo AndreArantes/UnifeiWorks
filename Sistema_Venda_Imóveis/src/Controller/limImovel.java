@@ -18,4 +18,8 @@ public class limImovel {
         
         return aDadosForm;
     }
+    
+    public void listaImoveis(String lista){
+        JOptionPane.showMessageDialog(null, lista);
+    }
 }

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 public class ctrImovel {
 
-    private /*ImovelView*/limImovel objALimImovel = new limImovel();//new ImovelView();
+    private /*ImovelView*/ limImovel objALimImovel = new limImovel();//new ImovelView();
     private ctrPrincipal objCtrPrincipal;
     private Imovel objAEntImovel;
     private String[] aDadosForm;
@@ -28,7 +28,7 @@ public class ctrImovel {
         cadastra();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(aDadosForm[4]);
-        objAEntImovel = new Imovel(aDadosForm[0],Integer.parseInt(aDadosForm[1]),aDadosForm[2],aDadosForm[3], Float.parseFloat(aDadosForm[4]), data);
+        objAEntImovel = new Imovel(aDadosForm[0], Integer.parseInt(aDadosForm[1]), aDadosForm[2], aDadosForm[3], Float.parseFloat(aDadosForm[4]), data);
         addVetor(objAEntImovel);
 
         return true;
@@ -42,35 +42,32 @@ public class ctrImovel {
         //aDadosForm = objALimImovel.pesquisaForm();
     }
 
-
     public void addVetor(Imovel pImovelp) {
         Imoveis.add(pImovelp);
     }
-    
-    public void preecheImoveisVendidos() throws Exception{
-        
-        for(int idx = 0; idx < listaVendas.size(); idx++){
-            
+
+    public void preecheImoveisVendidos() throws Exception {
+
+        for (int idx = 0; idx < listaVendas.size(); idx++) {
+
             Venda objVenda = (Venda) listaVendas.get(idx);
-            
-                for(int idx2 = 0; idx2 < Imoveis.size(); idx2++){
-                    
-                    Imovel objImovel = (Imovel) Imoveis.get(idx);
-                    
-                    if(objVenda.getCodImovel() == objImovel.getCodigo()){
-                       
-                        ImoveisVendidos.add(objImovel);
-                        Imoveis.remove(objImovel);
-                    } 
-               }
+
+            for (int idx2 = 0; idx2 < Imoveis.size(); idx2++) {
+
+                Imovel objImovel = (Imovel) Imoveis.get(idx);
+
+                if (objVenda.getCodImovel() == objImovel.getCodigo()) {
+
+                    ImoveisVendidos.add(objImovel);
+                    Imoveis.remove(objImovel);
+                }
+            }
         }
-        
+
         serializaImovel(); //testando
         serializaImovelVendido(); //testando
     }
-    
-    
-    
+
     private void serializaImovel() throws Exception {
         FileOutputStream objFileOS = new FileOutputStream("Imovel.dat");
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
@@ -88,7 +85,7 @@ public class ctrImovel {
             objIS.close();
         }
     }
-    
+
     private void serializaImovelVendido() throws Exception {
         FileOutputStream objFileOS = new FileOutputStream("ImovelVendido.dat");
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
@@ -106,7 +103,7 @@ public class ctrImovel {
             objIS.close();
         }
     }
-    
+
     public Vector getListagemImovel() {
         return Imoveis;
     }
@@ -115,19 +112,21 @@ public class ctrImovel {
         return "Código: " + objPImovel.getCodigo() + "  Nome Proprietário: " + objPImovel.getNomeProprietario() + "\n";
     }
 
-    public void getListaImovel() throws Exception {
-        desserializaImovel();    
+    public void getListaImovel(String pTipo) throws Exception {
+        desserializaImovel();
         String result = "";
         for (int idx = 0; idx < Imoveis.size(); idx++) {
             Imovel objImovel = (Imovel) Imoveis.elementAt(idx);
-            result += "Tipo: " + objImovel.getTipo()
-                      +" || Codigo: " + objImovel.getCodigo()
-                      +" || Nome do Proprietário: " + objImovel.getNomeProprietario()
-                      +" || Valor: " + objImovel.getValorRequerido()
-                      +"\n";
-            
+
+            if (objImovel.getTipo().equalsIgnoreCase(pTipo)) {
+                result += "Tipo: " + objImovel.getTipo()
+                        + " || Codigo: " + objImovel.getCodigo()
+                        + " || Nome do Proprietário: " + objImovel.getNomeProprietario()
+                        + " || Valor: " + objImovel.getValorRequerido()
+                        + "\n";
+            }
         }
-        
+
         if (result.equalsIgnoreCase("")) {
             System.out.println("Não existem Imoveis cadastrados.");
         } else {
@@ -135,20 +134,20 @@ public class ctrImovel {
             objALimImovel.listaImoveis(result);
         }
     }
-    
-        public String getListaVendidos() throws Exception {
-        desserializaImovelVendido();    
+
+    public String getListaVendidos() throws Exception {
+        desserializaImovelVendido();
         String result = "";
         for (int idx = 0; idx < ImoveisVendidos.size(); idx++) {
             Imovel objImovel = (Imovel) ImoveisVendidos.elementAt(idx);
             result += "Tipo: " + objImovel.getTipo()
-                      +" || Codigo: " + objImovel.getCodigo()
-                      +" || Nome do Proprietário: " + objImovel.getNomeProprietario()
-                      +" || Valor: " + objImovel.getValorRequerido()
-                      +"\n";
-            
+                    + " || Codigo: " + objImovel.getCodigo()
+                    + " || Nome do Proprietário: " + objImovel.getNomeProprietario()
+                    + " || Valor: " + objImovel.getValorRequerido()
+                    + "\n";
+
         }
-        
+
         if (result.equalsIgnoreCase("")) {
             return "Não existem Imoveis cadastrados.";
         } else {

@@ -9,7 +9,7 @@ public class Contratado extends Corretor implements Serializable{
     private Date dataAdmissao; // data que o corretor foi contratado pela empresa.
     private final float percentualVenda = (float) 0.01; // percentual de cada venda fixa de 1%.
 
-    public Contratado(float salarioFixo, Date dataAdmissao, String nome, int NumCRECI) {
+    public Contratado(String nome, int NumCRECI , float salarioFixo, Date dataAdmissao) {
         super(nome, NumCRECI);
         this.salarioFixo = salarioFixo;
         this.dataAdmissao = dataAdmissao;
