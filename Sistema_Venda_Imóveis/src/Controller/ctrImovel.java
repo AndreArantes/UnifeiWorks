@@ -2,7 +2,6 @@ package Controller;
 
 import Model.Imovel;
 import Model.Venda;
-import View.ImovelView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,39 +10,24 @@ import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 
 public class ctrImovel {
 
-    private /*ImovelView*/ limImovel objALimImovel = new limImovel();//new ImovelView();
     private ctrPrincipal objCtrPrincipal;
-    private Imovel objAEntImovel;
-    private String[] aDadosForm;
-    private String arquivo = "Imovel.dat";
-    private Vector Imoveis = new Vector();
     private Vector listaVendas = objCtrPrincipal.getObjACtrVenda().getListaVendas();
+    private Vector Imoveis = new Vector();
     private Vector ImoveisVendidos = new Vector();
 
-    public boolean cadImovel() throws ParseException {
-        cadastra();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(aDadosForm[4]);
-        objAEntImovel = new Imovel(aDadosForm[0], Integer.parseInt(aDadosForm[1]), aDadosForm[2], aDadosForm[3], Float.parseFloat(aDadosForm[4]), data);
-        addVetor(objAEntImovel);
+    public ctrImovel() throws Exception {
+        desserializaImovel();
+    }
 
+    
+    public boolean cadImovel(String tipo, String cod){
+        
         return true;
-    }
-
-    private void cadastra() {
-        aDadosForm = objALimImovel.montaForm();
-    }
-
-    private void pesquisa() {
-        //aDadosForm = objALimImovel.pesquisaForm();
-    }
-
-    public void addVetor(Imovel pImovelp) {
-        Imoveis.add(pImovelp);
     }
 
     public void preecheImoveisVendidos() throws Exception {
@@ -56,7 +40,7 @@ public class ctrImovel {
 
                 Imovel objImovel = (Imovel) Imoveis.get(idx);
 
-                if (objVenda.getCodImovel() == objImovel.getCodigo()) {
+                if (objVenda.getCodImovel().equalsIgnoreCase(objImovel.getCodigo()) ) {
 
                     ImoveisVendidos.add(objImovel);
                     Imoveis.remove(objImovel);
@@ -131,7 +115,6 @@ public class ctrImovel {
             System.out.println("Não existem Imoveis cadastrados.");
         } else {
             //return result;
-            objALimImovel.listaImoveis(result);
         }
     }
 
@@ -153,6 +136,34 @@ public class ctrImovel {
         } else {
             return result;
         }
+    }
+
+    public String getListaEncalhados() {
+
+        String result = "";
+        for (int idx = 0; idx < Imoveis.size(); idx++) {
+            Imovel objImovel = (Imovel) Imoveis.elementAt(idx);
+
+            if (getDateDiff(objImovel.getDataCadastro(), new Date(), TimeUnit.DAYS) > 180) {
+
+                result += "Tipo: " + objImovel.getTipo()
+                        + " || Codigo: " + objImovel.getCodigo()
+                        + " || Nome do Proprietário: " + objImovel.getNomeProprietario()
+                        + " || Valor: " + objImovel.getValorRequerido()
+                        + "\n";
+            }
+        }
+
+        if (result.equalsIgnoreCase("")) {
+            return "Não existem Imoveis cadastrados.";
+        } else {
+            return result;
+        }
+    }
+
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInDays = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInDays, TimeUnit.DAYS);
     }
 
     public void finalize() throws Exception {

@@ -2,13 +2,12 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.*;
 
 public class Corretor implements Serializable{
     private String nome; // nome do corretor.
-    private int NumCRECI; // número do orgão CRECI (5 digitos).
+    private String NumCRECI; // número do orgão CRECI (5 digitos).
 
-    public Corretor(String nome, int NumCRECI) {
+    public Corretor(String nome, String NumCRECI) {
         this.nome = nome;
         this.NumCRECI = NumCRECI;
     }
@@ -17,7 +16,7 @@ public class Corretor implements Serializable{
         return nome;
     }
 
-    public int getNumCRECI() {
+    public String getNumCRECI() {
         return NumCRECI;
     }
 }

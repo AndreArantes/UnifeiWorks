@@ -1,4 +1,3 @@
-
 package Controller;
 
 import Model.Corretor;
@@ -8,51 +7,37 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
 public class ctrVenda {
 
-    private limVenda objALimVenda = new limVenda();
-    private Venda objAEntVenda;
-    private ctrPrincipal objCtrPrincipal;
-    private Vector listaCorretores = objCtrPrincipal.getObjACtrCorretor().getListaCorretor();
-    private String[] aDadosForm;
-    private Vector vecAVendas = new Vector();
-    private final String arquivo = "disc.dat";
+
+    private Vector<Venda> vendas = new Vector<Venda>();
 
     public ctrVenda() throws Exception {
-        objALimVenda = new limVenda();
+        
         desserializaVenda();
+        
     }
 
-    public boolean cadVenda() throws ParseException {
-        cadastra();
+    public void cadVenda(String codImovel, float valorDaVenda, String nomeComprador, String dataVenda, String corretorResponsvel) throws Exception {
+        
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(aDadosForm[2]);
-        objAEntVenda = new Venda(Integer.parseInt(aDadosForm[0]), Float.parseFloat(aDadosForm[1]), aDadosForm[2], data, aDadosForm[4]);
-        addVetor(objAEntVenda);
-
-        return true;
-    }
-
-    private void cadastra() {
-        aDadosForm = objALimVenda.montaForm();
-    }
-
-    private void salva() {
-    }
-
-    public void addVetor(Venda pVenda) {
-        vecAVendas.add(pVenda);
+        Date data = formato.parse(dataVenda);
+ 
+        if (vendas.add(new Venda(codImovel, valorDaVenda, nomeComprador, data, corretorResponsvel))) {
+            serializaVenda();
+        } else {
+            throw new Exception("Error ao cadastrar venda!");
+        }
     }
 
     private void serializaVenda() throws Exception {
         FileOutputStream objFileOS = new FileOutputStream("vendas.dat");
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
-        objOS.writeObject(vecAVendas);
+        objOS.writeObject(vendas);
         objOS.flush();
         objOS.close();
     }
@@ -62,87 +47,64 @@ public class ctrVenda {
         if (objFile.exists()) {
             FileInputStream objFileIS = new FileInputStream("vendas.dat");
             ObjectInputStream objIS = new ObjectInputStream(objFileIS);
-            vecAVendas = (Vector) objIS.readObject();
+            vendas = (Vector) objIS.readObject();
             objIS.close();
         }
     }
 
     public Vector getListaVendas() {
-        return vecAVendas;
+        return vendas;
     }
 
-    public void imprimeListaVendas() {
-        String result = "Lista de Vendas:\n";
+    public String imprimeListaVendas() {
+        String result = "";
 
-        for (int idx = 0; idx < vecAVendas.size(); idx++) {
-            Venda objDisc = (Venda) vecAVendas.get(idx);
+        for (int idx = 0; idx < vendas.size(); idx++) {
+            Venda objDisc = (Venda) vendas.get(idx);
             result += "Valor: R$" + objDisc.getValorDaVenda()
-                    + " || Comprador: " + objDisc.getNomeComprador()
-                    + " || Data: " + objDisc.getDataVenda()
-                    + " || Corretor: " + objDisc.getCorretorResponsavel()
+                    + "\nComprador: " + objDisc.getNomeComprador()
+                    + "\nData: " + objDisc.getDataVenda()
+                    + "\nCorretor: " + objDisc.getCorretorResponsavel()
                     + "\n";
         }
-
-        objALimVenda.listaVendas(result);
+        
+    return result;    
     }
 
-    public void calculaFaturamento(String pMes) {
+    public float calculaFaturamento(String pMes) {
         float faturamento = 0;
 
-        for (int idx = 0; idx < vecAVendas.size(); idx++) {
-            Venda objVenda = (Venda) vecAVendas.get(idx);
+        for (int idx = 0; idx < vendas.size(); idx++) {
+            Venda objVenda = (Venda) vendas.get(idx);
 
             SimpleDateFormat sdf = new SimpleDateFormat("MM");
             String mes = sdf.format(objVenda.getDataVenda());
-            
+
             if (mes.equalsIgnoreCase(pMes)) {
                 faturamento += (objVenda.getValorDaVenda() * 5) / 100;
             }
         }
-
-        objALimVenda.imprimeFaturamento(faturamento);
-    }
-    
-        public float calculaFaturamentoCorretor(Corretor objCorretor, String pMes) {
-        float faturamento = 0;
-
-        for (int idx = 0; idx < vecAVendas.size(); idx++) {
-            Venda objVenda = (Venda) vecAVendas.get(idx);
-
-            SimpleDateFormat sdf = new SimpleDateFormat("MM");
-            String mes = sdf.format(objVenda.getDataVenda());
-            
-            if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(objCorretor)){
-                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
-            }
-        }
-
+        
     return faturamento;
     }
 
-    public void calculaLucro(String pMes) {
-        float lucro = 0;
+    public float calculaFaturamentoCorretor(Corretor objCorretor, String pMes) {
+        float faturamento = 0;
 
-        for (int idx = 0; idx < vecAVendas.size(); idx++) {
-            Venda objVenda = (Venda) vecAVendas.get(idx);
-            
+        for (int idx = 0; idx < vendas.size(); idx++) {
+            Venda objVenda = (Venda) vendas.get(idx);
+
             SimpleDateFormat sdf = new SimpleDateFormat("MM");
             String mes = sdf.format(objVenda.getDataVenda());
-            
-            if (mes.equalsIgnoreCase(pMes)) {
-                lucro += (objVenda.getValorDaVenda() * 5) / 100;
+
+            if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(objCorretor)) {
+                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
             }
         }
 
-        for (int idx = 0; idx < listaCorretores.size(); idx++) {
-            Corretor objCorretor = (Corretor) listaCorretores.get(idx);
-
-            lucro -= objCtrPrincipal.getObjACtrCorretor().calculaSalario(objCorretor,pMes);
-
-        }
-
-        objALimVenda.imprimeLucro(lucro);
+        return faturamento;
     }
+
 
     public void finalize() throws Exception {
         serializaVenda();
