@@ -19,4 +19,8 @@ public class Corretor implements Serializable{
     public String getNumCRECI() {
         return NumCRECI;
     }
+    
+    public String toString() {
+        return getNome();
+    }
 }

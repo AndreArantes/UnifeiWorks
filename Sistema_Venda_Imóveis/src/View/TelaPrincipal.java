@@ -1,15 +1,21 @@
 /**
-       GRUPO
-       
-    André Prado Arantes 
-    Claudio 
-    Yuri 
-    
+ * GRUPO
+ *
+ * ANDRE PRADO ARANTES - 2016011733
+ * CLAUDIO EDUARDO MACHADO SERPA - 2016010683
+ * YURI DE PAULA OLIVEIRA - 2016000121  *
  */
 package View;
 
 import Controller.ctrPrincipal;
+import Model.Comissionado;
+import Model.Contratado;
+import Model.Corretor;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 public class TelaPrincipal extends javax.swing.JFrame {
@@ -18,15 +24,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form TelaPrincipal
      */
     ctrPrincipal objPrincipal;
-    
+    Vector<Corretor> corretores;
+
     public TelaPrincipal(ctrPrincipal pCtr) {
         objPrincipal = pCtr;
+        corretores = objPrincipal.getObjACtrCorretor().getListaCorretor();
         this.setVisible(true);
         initComponents();
     }
-    
+
     public TelaPrincipal() {
         initComponents();
+    }
+
+    public boolean validaDataSalario(String pMes, String pAno) {
+
+        if (pMes.equalsIgnoreCase("") || pAno.equalsIgnoreCase("")) {
+            return false;
+        } else {
+
+            int mes = Integer.parseInt(pMes);
+            int ano = Integer.parseInt(pAno);
+            Date dataAtual = new Date();
+
+            GregorianCalendar gc = new GregorianCalendar();
+            gc.setTime(dataAtual);
+            int year = gc.get(GregorianCalendar.YEAR);
+
+            if (mes > 12 || mes < 1 || ano > year) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -56,9 +86,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButtonConfirma1 = new javax.swing.JButton();
         jButtonCancela1 = new javax.swing.JButton();
-        jTextFieldCorretorResponsavel = new javax.swing.JTextField();
         jTextFieldValorVenda = new javax.swing.JTextField();
         jTextFieldDataVenda = new javax.swing.JFormattedTextField();
+        jComboBoxCorretorResponsavel = new javax.swing.JComboBox<>();
         CadastroCorretorCT = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -79,6 +109,32 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jTextFieldNameCM = new javax.swing.JTextField();
         jTextFieldNumberCM = new javax.swing.JTextField();
         jComboBoxComissao = new javax.swing.JComboBox<>();
+        CalculaSalario = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jComboBoxCorretores = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        jTextFieldMes = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jTextFieldAno = new javax.swing.JTextField();
+        jButtonCalculaSal = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaSalario = new javax.swing.JTextArea();
+        AlteraSalario = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jComboBoxCorretoresCT = new javax.swing.JComboBox<>();
+        jLabel18 = new javax.swing.JLabel();
+        jTextFieldNewPayment = new javax.swing.JTextField();
+        jButtonCancela4 = new javax.swing.JButton();
+        jButtonConfirma4 = new javax.swing.JButton();
+        AlteraComissao = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        jComboBoxCorretoresCM = new javax.swing.JComboBox<>();
+        jLabel20 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuBusca = new javax.swing.JMenu();
         jMenuBuscaImovel = new javax.swing.JMenuItem();
@@ -89,7 +145,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuCadastroCorretorCT = new javax.swing.JMenuItem();
         jMenuCadastroCorretorCM = new javax.swing.JMenuItem();
-        jMenuSalario_Comissao = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuCalculaSal = new javax.swing.JMenuItem();
+        jMenuAltSal = new javax.swing.JMenuItem();
+        jMenuAltCom = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuRelátorios = new javax.swing.JMenuItem();
 
@@ -208,7 +267,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(CadastroVendaLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCorretorResponsavel))
+                        .addComponent(jComboBoxCorretorResponsavel, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(CadastroVendaLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,8 +314,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(CadastroVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldCorretorResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                    .addComponent(jComboBoxCorretorResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                 .addGroup(CadastroVendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirma1)
                     .addComponent(jButtonCancela1))
@@ -304,38 +363,35 @@ public class TelaPrincipal extends javax.swing.JFrame {
         CadastroCorretorCTLayout.setHorizontalGroup(
             CadastroCorretorCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(CadastroCorretorCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroCorretorCTLayout.createSequentialGroup()
+                        .addContainerGap(472, Short.MAX_VALUE)
+                        .addComponent(jButtonConfirma2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCancela2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1DataCT))
-                    .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(CadastroCorretorCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1DataCT))
                             .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNameCT, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldNameCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
                             .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumberCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldNumberCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
                             .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldSalCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroCorretorCTLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonConfirma2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonCancela2)))
+                                .addComponent(jTextFieldSalCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
         CadastroCorretorCTLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel10, jLabel7, jLabel8, jLabel9});
-
-        CadastroCorretorCTLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextFieldNameCT, jTextFieldNumberCT, jTextFieldSalCT});
 
         CadastroCorretorCTLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonCancela2, jButtonConfirma2});
 
@@ -402,26 +458,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCancela3))
                     .addGroup(CadastroCorretorCMLayout.createSequentialGroup()
-                        .addGroup(CadastroCorretorCMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CadastroCorretorCMLayout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNameCM, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(CadastroCorretorCMLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumberCM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(CadastroCorretorCMLayout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxComissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNameCM))
+                    .addGroup(CadastroCorretorCMLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNumberCM, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE))
+                    .addGroup(CadastroCorretorCMLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxComissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         CadastroCorretorCMLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel11, jLabel12, jLabel13});
 
-        CadastroCorretorCMLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextFieldNameCM, jTextFieldNumberCM});
+        CadastroCorretorCMLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonCancela3, jButtonConfirma3});
 
         CadastroCorretorCMLayout.setVerticalGroup(
             CadastroCorretorCMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,6 +499,228 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
 
         TelaPrincipal.add(CadastroCorretorCM, "TelaCadastroCM");
+
+        jLabel14.setText("Corretores:");
+
+        jLabel15.setText("Mês:");
+
+        jLabel16.setText("Ano:");
+
+        jButtonCalculaSal.setText("Calcular");
+        jButtonCalculaSal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalculaSalActionPerformed(evt);
+            }
+        });
+
+        jTextAreaSalario.setColumns(20);
+        jTextAreaSalario.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaSalario);
+
+        javax.swing.GroupLayout CalculaSalarioLayout = new javax.swing.GroupLayout(CalculaSalario);
+        CalculaSalario.setLayout(CalculaSalarioLayout);
+        CalculaSalarioLayout.setHorizontalGroup(
+            CalculaSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CalculaSalarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CalculaSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
+                    .addGroup(CalculaSalarioLayout.createSequentialGroup()
+                        .addGroup(CalculaSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CalculaSalarioLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(CalculaSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxCorretores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(CalculaSalarioLayout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonCalculaSal)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        CalculaSalarioLayout.setVerticalGroup(
+            CalculaSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CalculaSalarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CalculaSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jComboBoxCorretores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CalculaSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jTextFieldMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCalculaSal))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        TelaPrincipal.add(CalculaSalario, "TelaCalculaSalario");
+
+        jLabel17.setText("Corretores:");
+
+        jLabel18.setText("Novo Valor:");
+
+        jButtonCancela4.setText("Cancela");
+        jButtonCancela4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancela4ActionPerformed(evt);
+            }
+        });
+
+        jButtonConfirma4.setText("Confirma");
+        jButtonConfirma4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirma4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AlteraSalarioLayout = new javax.swing.GroupLayout(AlteraSalario);
+        AlteraSalario.setLayout(AlteraSalarioLayout);
+        AlteraSalarioLayout.setHorizontalGroup(
+            AlteraSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AlteraSalarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AlteraSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AlteraSalarioLayout.createSequentialGroup()
+                        .addGap(0, 466, Short.MAX_VALUE)
+                        .addComponent(jButtonConfirma4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCancela4))
+                    .addGroup(AlteraSalarioLayout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxCorretoresCT, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(AlteraSalarioLayout.createSequentialGroup()
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNewPayment)))
+                .addContainerGap())
+        );
+
+        AlteraSalarioLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel17, jLabel18});
+
+        AlteraSalarioLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonCancela4, jButtonConfirma4});
+
+        AlteraSalarioLayout.setVerticalGroup(
+            AlteraSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AlteraSalarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AlteraSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(jComboBoxCorretoresCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(AlteraSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(jTextFieldNewPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
+                .addGroup(AlteraSalarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancela4)
+                    .addComponent(jButtonConfirma4))
+                .addContainerGap())
+        );
+
+        TelaPrincipal.add(AlteraSalario, "TelaAlteraSalario");
+
+        jLabel19.setText("Corretores:");
+
+        jComboBoxCorretoresCM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCorretoresCMActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Comissao (%):");
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+
+        jButton4.setText("Cancela");
+
+        jButton5.setText("Confirma");
+
+        javax.swing.GroupLayout AlteraComissaoLayout = new javax.swing.GroupLayout(AlteraComissao);
+        AlteraComissao.setLayout(AlteraComissaoLayout);
+        AlteraComissaoLayout.setHorizontalGroup(
+            AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AlteraComissaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AlteraComissaoLayout.createSequentialGroup()
+                        .addGroup(AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AlteraComissaoLayout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxCorretoresCM, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AlteraComissaoLayout.createSequentialGroup()
+                                .addGap(0, 466, Short.MAX_VALUE)
+                                .addComponent(jButton5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4)))
+                        .addContainerGap())
+                    .addGroup(AlteraComissaoLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+
+        AlteraComissaoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5});
+
+        AlteraComissaoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel19, jLabel20});
+
+        AlteraComissaoLayout.setVerticalGroup(
+            AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AlteraComissaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(jComboBoxCorretoresCM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                .addGroup(AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5))
+                .addContainerGap())
+        );
+
+        TelaPrincipal.add(AlteraComissao, "TelaAlteraComissao");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 412, Short.MAX_VALUE)
+        );
+
+        TelaPrincipal.add(jPanel4, "card11");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 412, Short.MAX_VALUE)
+        );
+
+        TelaPrincipal.add(jPanel5, "card12");
 
         jMenuBusca.setText("Imóveis");
 
@@ -501,8 +776,33 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu3.add(jMenu1);
 
-        jMenuSalario_Comissao.setText("Salários / Comissões");
-        jMenu3.add(jMenuSalario_Comissao);
+        jMenu5.setText("Salarios / Comissões");
+
+        jMenuCalculaSal.setText("Calcular");
+        jMenuCalculaSal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCalculaSalActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuCalculaSal);
+
+        jMenuAltSal.setText("Alterar Salário");
+        jMenuAltSal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAltSalActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuAltSal);
+
+        jMenuAltCom.setText("Alterar Comissão");
+        jMenuAltCom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAltComActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuAltCom);
+
+        jMenu3.add(jMenu5);
 
         jMenuBar1.add(jMenu3);
 
@@ -532,20 +832,37 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuCadastroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroVendaActionPerformed
         // TODO add your handling code here:
+        jTextFieldCodImovel.setText("");
+        jTextFieldNomeComprador.setText("");
+        jTextFieldValorVenda.setText("");
+        jTextFieldDataVenda.setText("");
+        
+        String[] listaCorretores = new String[corretores.size()];
+        int idx = 0;
+
+        for (Corretor c : corretores) {
+            listaCorretores[idx] = c.getNome();
+            idx++;
+
+        }
+        
+        jComboBoxCorretorResponsavel.setModel(new javax.swing.DefaultComboBoxModel<>(listaCorretores));
+        jComboBoxCorretorResponsavel.setSelectedIndex(0);
+        
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaCadastroVenda");
+        card.show(TelaPrincipal, "TelaCadastroVenda");
     }//GEN-LAST:event_jMenuCadastroVendaActionPerformed
 
     private void jMenuCadastroImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroImovelActionPerformed
         // TODO add your handling code here:
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaCadastroImovel");
+        card.show(TelaPrincipal, "TelaCadastroImovel");
     }//GEN-LAST:event_jMenuCadastroImovelActionPerformed
 
     private void jMenuBuscaImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBuscaImovelActionPerformed
         // TODO add your handling code here:
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaBusca");
+        card.show(TelaPrincipal, "TelaBusca");
     }//GEN-LAST:event_jMenuBuscaImovelActionPerformed
 
     private void jButtonConfirma1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma1ActionPerformed
@@ -554,28 +871,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         float valor = Float.parseFloat(jTextFieldValorVenda.getText());
         String nomeComprador = jTextFieldNomeComprador.getText();
         String data = jTextFieldDataVenda.getText();
-        String corretor = jTextFieldCorretorResponsavel.getText();
-        
+        String corretor = jComboBoxCorretorResponsavel.getItemAt(jComboBoxCorretorResponsavel.getSelectedIndex());
+
         try {
-            objPrincipal.cadVenda(cod,valor,nomeComprador,data,corretor);
+            objPrincipal.cadVenda(cod, valor, nomeComprador, data, corretor);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
-        
+
         jTextFieldCodImovel.setText("");
         jTextFieldValorVenda.setText("");
         jTextFieldNomeComprador.setText("");
         jTextFieldDataVenda.setText("");
-        jTextFieldCorretorResponsavel.setText("");
+        jComboBoxCorretorResponsavel.setSelectedIndex(0);
         
+
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaCadastroVenda");
+        card.show(TelaPrincipal, "TelaCadastroVenda");
     }//GEN-LAST:event_jButtonConfirma1ActionPerformed
 
     private void jButtonCancela1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancela1ActionPerformed
         // TODO add your handling code here:
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaDefault");
+        card.show(TelaPrincipal, "TelaDefault");
     }//GEN-LAST:event_jButtonCancela1ActionPerformed
 
     private void jTextFieldSalCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSalCTActionPerformed
@@ -584,46 +902,216 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonConfirma2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma2ActionPerformed
         // TODO add your handling code here:
-        String name = jTextFieldNameCT.getText();
-        String nCRECI = jTextFieldNumberCT.getText();
-        float salario = Float.parseFloat(jTextFieldSalCT.getText());
-        String data = jTextField1DataCT.getText();
-        
-        
+        String nameCT = jTextFieldNameCT.getText();
+        String nCreciCT = jTextFieldNumberCT.getText();
+        float salarioCT = Float.parseFloat(jTextFieldSalCT.getText());
+        String dataCT = jTextField1DataCT.getText();
+
+        try {
+            objPrincipal.cadCorretorCT(nameCT, nCreciCT, salarioCT, dataCT);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+
+        jTextFieldNameCT.setText("");
+        jTextFieldNumberCT.setText("");
+        jTextFieldSalCT.setText("");
+        jTextField1DataCT.setText("");
+
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaCadastroCT");
     }//GEN-LAST:event_jButtonConfirma2ActionPerformed
 
     private void jButtonCancela2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancela2ActionPerformed
         // TODO add your handling code here:
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaDefault");
+        card.show(TelaPrincipal, "TelaDefault");
     }//GEN-LAST:event_jButtonCancela2ActionPerformed
 
     private void jButtonCancela3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancela3ActionPerformed
         // TODO add your handling code here:
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaDefault");
+        card.show(TelaPrincipal, "TelaDefault");
     }//GEN-LAST:event_jButtonCancela3ActionPerformed
 
     private void jButtonConfirma3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma3ActionPerformed
         // TODO add your handling code here:
-        String name = jTextFieldNameCM.getText();
-        String nCRECI = jTextFieldNumberCM.getText();
-        float comission = (1 + (jComboBoxComissao.getSelectedIndex())) / 100;
-        
-        
+        String nameCM = jTextFieldNameCM.getText();
+        String nCreciCM = jTextFieldNumberCM.getText();
+        float comissionCM = (float) (1 + (jComboBoxComissao.getSelectedIndex())) / 100;
+
+        try {
+            objPrincipal.cadCorretorCM(nameCM, nCreciCM, comissionCM);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+
+        jTextFieldNameCM.setText("");
+        jTextFieldNumberCM.setText("");
+        jComboBoxComissao.setSelectedIndex(0);
+
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaCadastroCM");
     }//GEN-LAST:event_jButtonConfirma3ActionPerformed
 
     private void jMenuCadastroCorretorCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCorretorCTActionPerformed
         // TODO add your handling code here:
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaCadastroCT");
+        card.show(TelaPrincipal, "TelaCadastroCT");
     }//GEN-LAST:event_jMenuCadastroCorretorCTActionPerformed
 
     private void jMenuCadastroCorretorCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCorretorCMActionPerformed
         // TODO add your handling code here:
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal,"TelaCadastroCM");
+        card.show(TelaPrincipal, "TelaCadastroCM");
     }//GEN-LAST:event_jMenuCadastroCorretorCMActionPerformed
+
+    private void jMenuAltSalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltSalActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Contratado> contratados = new ArrayList<Contratado>();
+        int idx = 0;
+
+        for (Corretor c : corretores) {
+
+            if (c instanceof Contratado) {
+                contratados.add((Contratado) c);
+            }
+
+        }
+
+        String[] listaCorretores = new String[contratados.size()];
+
+        for (Contratado ct : contratados) {
+            listaCorretores[idx] = ct.getNome();
+            idx++;
+
+        }
+
+        jComboBoxCorretoresCT.setModel(new javax.swing.DefaultComboBoxModel<>(listaCorretores));
+
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaAlteraSalario");
+    }//GEN-LAST:event_jMenuAltSalActionPerformed
+
+    private void jComboBoxCorretoresCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCorretoresCMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCorretoresCMActionPerformed
+
+    private void jMenuCalculaSalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCalculaSalActionPerformed
+        // TODO add your handling code here:
+        String[] listaCorretores = new String[corretores.size()];
+        int idx = 0;
+
+        for (Corretor c : corretores) {
+            listaCorretores[idx] = c.getNome();
+            idx++;
+
+        }
+        jComboBoxCorretores.setModel(new javax.swing.DefaultComboBoxModel<>(listaCorretores));
+
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaCalculaSalario");
+    }//GEN-LAST:event_jMenuCalculaSalActionPerformed
+
+    private void jMenuAltComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltComActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Comissionado> comissionados = new ArrayList<Comissionado>();
+
+        int idx = 0;
+
+        for (Corretor c : corretores) {
+
+            if (c instanceof Comissionado) {
+                comissionados.add((Comissionado) c);
+            }
+
+        }
+
+        String[] listaCorretores = new String[comissionados.size()];
+
+        for (Comissionado ct : comissionados) {
+            listaCorretores[idx] = ct.getNome();
+            idx++;
+
+        }
+
+        jComboBoxCorretoresCM.setModel(new javax.swing.DefaultComboBoxModel<>(listaCorretores));
+
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaAlteraComissao");
+    }//GEN-LAST:event_jMenuAltComActionPerformed
+
+    private void jButtonCalculaSalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalculaSalActionPerformed
+        // TODO add your handling code here:
+        String corretor = jComboBoxCorretores.getItemAt(jComboBoxCorretores.getSelectedIndex());
+        String mes = jTextFieldMes.getText();
+        String ano = jTextFieldAno.getText();
+
+        if (validaDataSalario(mes, ano)) {
+            Corretor cor = objPrincipal.buscaCorretor(corretor);
+            float salarioFinal = objPrincipal.calculaSalario(cor, mes, ano);
+
+            if (cor instanceof Contratado) {
+                String dados = "       " + cor.getNome() + "\n"
+                        + "\nSalário: R$" + ((Contratado) cor).getSalarioFixo()
+                        + "\nComissao: R$" + (salarioFinal - ((Contratado) cor).getSalarioFixo())
+                        + "\nSalario Final: R$" + salarioFinal
+                        + "\n";
+
+                jTextAreaSalario.setText(dados);
+                jTextFieldMes.setText("");
+                jTextFieldAno.setText("");
+                jComboBoxCorretores.setSelectedIndex(0);
+
+            } else if (cor instanceof Comissionado) {
+                String dados = "       " + cor.getNome() + "\n"
+                        + "\nComissao: R$" + (salarioFinal)
+                        + "\n";
+
+                jTextAreaSalario.setText(dados);
+                jTextFieldMes.setText("");
+                jTextFieldAno.setText("");
+                jComboBoxCorretores.setSelectedIndex(0);
+            }
+        } else {
+
+            CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+            card.show(TelaPrincipal, "TelaCalculaSalario");
+
+            jTextAreaSalario.setText("O mes ou ano inseridos não são validos!");
+            jTextFieldMes.setText("");
+            jTextFieldAno.setText("");
+            jComboBoxCorretores.setSelectedIndex(0);
+        }
+
+
+    }//GEN-LAST:event_jButtonCalculaSalActionPerformed
+
+    private void jButtonConfirma4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma4ActionPerformed
+        // TODO add your handling code here:
+
+        if (jTextFieldNewPayment.getText().equalsIgnoreCase("") || jTextFieldNewPayment.getText().equalsIgnoreCase("Error campo novo salário vazio!")
+                || jTextFieldNewPayment.getText().equalsIgnoreCase("Salario alterado com sucesso!")) {
+            jTextFieldNewPayment.setText("Error campo novo salário vazio!");
+            jComboBoxCorretoresCT.setSelectedIndex(0);
+        } else {
+            String corretor = jComboBoxCorretoresCT.getItemAt(jComboBoxCorretoresCT.getSelectedIndex());
+            float novo_salario = Float.parseFloat(jTextFieldNewPayment.getText());
+
+            Corretor cor = objPrincipal.buscaCorretor(corretor);
+
+            ((Contratado) cor).setSalarioFixo(novo_salario);
+            jTextFieldNewPayment.setText("Salario alterado com sucesso!");
+        }
+
+
+    }//GEN-LAST:event_jButtonConfirma4ActionPerformed
+
+    private void jButtonCancela4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancela4ActionPerformed
+        // TODO add your handling code here:
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaDefault");
+    }//GEN-LAST:event_jButtonCancela4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -661,28 +1149,48 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AlteraComissao;
+    private javax.swing.JPanel AlteraSalario;
     private javax.swing.JPanel BuscaImovel;
     private javax.swing.JPanel CadastroCorretorCM;
     private javax.swing.JPanel CadastroCorretorCT;
     private javax.swing.JPanel CadastroImovel;
     private javax.swing.JPanel CadastroVenda;
+    private javax.swing.JPanel CalculaSalario;
     private javax.swing.JPanel TelaDefault;
     private javax.swing.JPanel TelaPrincipal;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonCalculaSal;
     private javax.swing.JButton jButtonCancela1;
     private javax.swing.JButton jButtonCancela2;
     private javax.swing.JButton jButtonCancela3;
+    private javax.swing.JButton jButtonCancela4;
     private javax.swing.JButton jButtonConfirma1;
     private javax.swing.JButton jButtonConfirma2;
     private javax.swing.JButton jButtonConfirma3;
+    private javax.swing.JButton jButtonConfirma4;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBoxComissao;
+    private javax.swing.JComboBox<String> jComboBoxCorretorResponsavel;
+    private javax.swing.JComboBox<String> jComboBoxCorretores;
+    private javax.swing.JComboBox<String> jComboBoxCorretoresCM;
+    private javax.swing.JComboBox<String> jComboBoxCorretoresCT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -694,6 +1202,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem jMenuAltCom;
+    private javax.swing.JMenuItem jMenuAltSal;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuBusca;
     private javax.swing.JMenuItem jMenuBuscaImovel;
@@ -701,15 +1212,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCadastroCorretorCT;
     private javax.swing.JMenuItem jMenuCadastroImovel;
     private javax.swing.JMenuItem jMenuCadastroVenda;
+    private javax.swing.JMenuItem jMenuCalculaSal;
     private javax.swing.JMenuItem jMenuRelátorios;
-    private javax.swing.JMenuItem jMenuSalario_Comissao;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaSalario;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JFormattedTextField jTextField1DataCT;
+    private javax.swing.JTextField jTextFieldAno;
     private javax.swing.JTextField jTextFieldCodImovel;
-    private javax.swing.JTextField jTextFieldCorretorResponsavel;
     private javax.swing.JFormattedTextField jTextFieldDataVenda;
+    private javax.swing.JTextField jTextFieldMes;
     private javax.swing.JTextField jTextFieldNameCM;
     private javax.swing.JTextField jTextFieldNameCT;
+    private javax.swing.JTextField jTextFieldNewPayment;
     private javax.swing.JTextField jTextFieldNomeComprador;
     private javax.swing.JTextField jTextFieldNumberCM;
     private javax.swing.JTextField jTextFieldNumberCT;

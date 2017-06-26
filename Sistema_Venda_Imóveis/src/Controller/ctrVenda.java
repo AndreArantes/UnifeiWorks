@@ -13,11 +13,12 @@ import java.util.Vector;
 
 public class ctrVenda {
 
-
+    private ctrPrincipal objPrincipal;
     private Vector<Venda> vendas = new Vector<Venda>();
 
-    public ctrVenda() throws Exception {
+    public ctrVenda(ctrPrincipal pCtr) throws Exception {
         
+        objPrincipal = pCtr;
         desserializaVenda();
         
     }
@@ -28,6 +29,7 @@ public class ctrVenda {
         Date data = formato.parse(dataVenda);
  
         if (vendas.add(new Venda(codImovel, valorDaVenda, nomeComprador, data, corretorResponsvel))) {
+            objPrincipal.objACtrImovel.vendeImovel(codImovel);
             serializaVenda();
         } else {
             throw new Exception("Error ao cadastrar venda!");

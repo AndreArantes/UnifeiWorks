@@ -1,10 +1,7 @@
 
 package Model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-public class Comissionado extends Corretor{
+public class Comissionado extends Corretor {
         private float percentualVenda; // comissão do corretor (varia de 1% a 3%).
 
     public Comissionado(String nome, String NumCRECI, float numPercentual) {

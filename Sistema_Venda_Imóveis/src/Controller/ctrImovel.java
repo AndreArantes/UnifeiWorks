@@ -7,21 +7,25 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import javax.swing.JOptionPane;
+
 
 public class ctrImovel {
 
     private ctrPrincipal objCtrPrincipal;
-    private Vector listaVendas = objCtrPrincipal.getObjACtrVenda().getListaVendas();
-    private Vector Imoveis = new Vector();
-    private Vector ImoveisVendidos = new Vector();
+    private Vector<Venda> listaVendas;
+    private Vector<Imovel> Imoveis = new Vector<Imovel>();
+    private Vector<Imovel> ImoveisVendidos = new Vector<Imovel>();
 
-    public ctrImovel() throws Exception {
+    public ctrImovel(ctrPrincipal pCtr) throws Exception {
+        
+        objCtrPrincipal = pCtr;
+        listaVendas = objCtrPrincipal.getObjACtrVenda().getListaVendas();
         desserializaImovel();
+        desserializaImovelVendido();
+        
+        
     }
 
     
@@ -30,30 +34,27 @@ public class ctrImovel {
         return true;
     }
 
-    public void preecheImoveisVendidos() throws Exception {
+    public void vendeImovel(String codImovel) throws Exception {
 
-        for (int idx = 0; idx < listaVendas.size(); idx++) {
-
-            Venda objVenda = (Venda) listaVendas.get(idx);
-
-            for (int idx2 = 0; idx2 < Imoveis.size(); idx2++) {
+            for (int idx = 0; idx < Imoveis.size(); idx++) {
 
                 Imovel objImovel = (Imovel) Imoveis.get(idx);
 
-                if (objVenda.getCodImovel().equalsIgnoreCase(objImovel.getCodigo()) ) {
+                if(objImovel.getCodigo().equalsIgnoreCase(codImovel)){
 
                     ImoveisVendidos.add(objImovel);
                     Imoveis.remove(objImovel);
+                    serializaImovel();
+                    serializaImovelVendido();
+                    break;
                 }
             }
-        }
-
-        serializaImovel(); //testando
-        serializaImovelVendido(); //testando
+            
+    throw new Exception("Imovel não encontrado!");
     }
 
     private void serializaImovel() throws Exception {
-        FileOutputStream objFileOS = new FileOutputStream("Imovel.dat");
+        FileOutputStream objFileOS = new FileOutputStream("imoveis.dat");
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
         objOS.writeObject(Imoveis);
         objOS.flush();
@@ -61,9 +62,9 @@ public class ctrImovel {
     }
 
     private void desserializaImovel() throws Exception {
-        File objFile = new File("Imovel.dat");
+        File objFile = new File("imoveis.dat");
         if (objFile.exists()) {
-            FileInputStream objFileIS = new FileInputStream("Imovel.dat");
+            FileInputStream objFileIS = new FileInputStream("imoveis.dat");
             ObjectInputStream objIS = new ObjectInputStream(objFileIS);
             Imoveis = (Vector) objIS.readObject();
             objIS.close();
@@ -71,7 +72,7 @@ public class ctrImovel {
     }
 
     private void serializaImovelVendido() throws Exception {
-        FileOutputStream objFileOS = new FileOutputStream("ImovelVendido.dat");
+        FileOutputStream objFileOS = new FileOutputStream("imoveisVendidos.dat");
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
         objOS.writeObject(ImoveisVendidos);
         objOS.flush();
@@ -79,9 +80,9 @@ public class ctrImovel {
     }
 
     private void desserializaImovelVendido() throws Exception {
-        File objFile = new File("ImovelVendido.dat");
+        File objFile = new File("imoveisVendidos.dat");
         if (objFile.exists()) {
-            FileInputStream objFileIS = new FileInputStream("ImovelVendido.dat");
+            FileInputStream objFileIS = new FileInputStream("imoveisVendidos.dat");
             ObjectInputStream objIS = new ObjectInputStream(objFileIS);
             ImoveisVendidos = (Vector) objIS.readObject();
             objIS.close();
@@ -92,7 +93,7 @@ public class ctrImovel {
         return Imoveis;
     }
 
-    private String getImovel(Imovel objPImovel) {
+    public String getImovel(Imovel objPImovel) {
         return "Código: " + objPImovel.getCodigo() + "  Nome Proprietário: " + objPImovel.getNomeProprietario() + "\n";
     }
 

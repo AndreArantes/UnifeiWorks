@@ -1,26 +1,27 @@
-
 package Controller;
 
+import Model.Corretor;
 import View.TelaPrincipal;
-import java.util.Date;
+
 
 public class ctrPrincipal {
-    
-    private TelaPrincipal objALimPrincipal;
-    private ctrImovel objACtrImovel;
-    private ctrCorretor objACtrCorretor;
-    private ctrVenda objACtrVenda;
-    
-    
-    public ctrPrincipal() throws Exception {    
-       try{ 
-        objACtrVenda = new ctrVenda();
-        objACtrImovel = new ctrImovel();
-        objACtrCorretor = new ctrCorretor();
-       } catch(Exception ex) { 
-           
-       }
+
+    public TelaPrincipal objALimPrincipal;
+    ctrImovel objACtrImovel;
+    ctrCorretor objACtrCorretor;
+    ctrVenda objACtrVenda;
+
+    public ctrPrincipal() throws Exception {
+
+        objACtrVenda = new ctrVenda(this);
+        objACtrImovel = new ctrImovel(this);
+        objACtrCorretor = new ctrCorretor(this);
+
         objALimPrincipal = new TelaPrincipal(this);
+    }
+
+    public ctrVenda getObjACtrVenda() {
+        return objACtrVenda;
     }
 
     public ctrImovel getObjCtrImovel() {
@@ -31,47 +32,39 @@ public class ctrPrincipal {
         return objACtrCorretor;
     }
 
-    public ctrVenda getObjACtrVenda() {
-        return objACtrVenda;
+    public void cadCorretorCT(String nome, String CRECI, float salariofixo, String pData) throws Exception {
+        objACtrCorretor.cadCorretorCT(nome, CRECI, salariofixo, pData);
+
     }
 
-/*
-    private boolean cadImovel() {
-        return objACtrImovel.cadImovel();
+    public void cadCorretorCM(String nome, String CRECI, float comissao) throws Exception {
+        objACtrCorretor.cadCorretorCM(nome, CRECI, comissao);
     }
 
-    private boolean cadCorretor() {
-        return objACtrEstudante.cadEstudante();
-    }
-    */
     public void cadVenda(String codImovel, float valorDaVenda, String nomeComprador, String dataVenda, String corretorResponsvel) throws Exception {
         objACtrVenda.cadVenda(codImovel, valorDaVenda, nomeComprador, dataVenda, corretorResponsvel);
     }
-    /*
-    public void listaEstudantes(){
-        objACtrEstudante.imprimeListaEstudantes();
+    
+    public Corretor buscaCorretor(String nome){
+        return objACtrCorretor.buscaCorretor(nome);
     }
     
-    public void listaDisciplinas(){
-        objACtrDisciplina.imprimeListaDisciplinas();
+    public float calculaSalario(Corretor objCorretor, String pMes,String pAno){
+        return objACtrCorretor.calculaSalario(objCorretor, pMes, pAno);
     }
-    
-    public void listaTurmas(){
-        objACtrTurma.imprimeListaTurmas();
-    }
-    */
+
     public void finalize() {
         try {
             objACtrImovel.finalize();
             objACtrCorretor.finalize();
             objACtrVenda.finalize();
         } catch (Exception e) {
-            System.err.println("Erro ao fechar arquivo!");
+
         }
         System.exit(0);
     }
-    
-        public static void  main(String [] args) throws Exception{
-            ctrPrincipal cp = new ctrPrincipal();
-        }
+
+    public static void main(String[] args) throws Exception {
+        ctrPrincipal cp = new ctrPrincipal();
+    }
 }
