@@ -9,6 +9,10 @@ public class Comissionado extends Corretor {
         this.percentualVenda = numPercentual;
     }
 
+    public void setPercentualVenda(float percentualVenda) {
+        this.percentualVenda = percentualVenda;
+    }
+
     public float getPercentualVenda() {
         return percentualVenda;
     }

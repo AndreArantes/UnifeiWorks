@@ -55,7 +55,7 @@ public class ctrCorretor {
     }
 
     
-    private void serializaCorretor() throws Exception {
+    public void serializaCorretor() throws Exception {
         FileOutputStream objFileOS = new FileOutputStream("corretores.dat");
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
         objOS.writeObject(corretores);
@@ -63,7 +63,7 @@ public class ctrCorretor {
         objOS.close();
     }
 
-    private void desserializaCorretor() throws Exception {
+    public void desserializaCorretor() throws Exception {
         File objFile = new File("corretores.dat");
         if (objFile.exists()) {
             FileInputStream objFileIS = new FileInputStream("corretores.dat");

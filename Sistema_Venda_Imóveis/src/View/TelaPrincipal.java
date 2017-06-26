@@ -3,7 +3,7 @@
  *
  * ANDRE PRADO ARANTES - 2016011733
  * CLAUDIO EDUARDO MACHADO SERPA - 2016010683
- * YURI DE PAULA OLIVEIRA - 2016000121  *
+ * YURI DE PAULA OLIVEIRA - 2016000121
  */
 package View;
 
@@ -130,9 +130,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jComboBoxCorretoresCM = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jComboBoxNewComission = new javax.swing.JComboBox<>();
+        jButtonCancela5 = new javax.swing.JButton();
+        jButtonConfirma5 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -150,7 +150,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuAltSal = new javax.swing.JMenuItem();
         jMenuAltCom = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuRelátorios = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuFaturamentoImobiliaria = new javax.swing.JMenuItem();
+        jMenuLucroImobiliaria = new javax.swing.JMenuItem();
+        jMenuImovelVendido = new javax.swing.JMenuItem();
+        jMenuImovelEncalhado = new javax.swing.JMenuItem();
+        jMenuFaturamentoCorretor = new javax.swing.JMenuItem();
+        jMenuPagamentoCorretor = new javax.swing.JMenuItem();
+        jMenuCorretorDoMes = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -640,11 +647,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jLabel20.setText("Comissao (%):");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        jComboBoxNewComission.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
-        jButton4.setText("Cancela");
+        jButtonCancela5.setText("Cancela");
 
-        jButton5.setText("Confirma");
+        jButtonConfirma5.setText("Confirma");
+        jButtonConfirma5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirma5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout AlteraComissaoLayout = new javax.swing.GroupLayout(AlteraComissao);
         AlteraComissao.setLayout(AlteraComissaoLayout);
@@ -661,18 +673,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jComboBoxCorretoresCM, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AlteraComissaoLayout.createSequentialGroup()
                                 .addGap(0, 466, Short.MAX_VALUE)
-                                .addComponent(jButton5)
+                                .addComponent(jButtonConfirma5)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton4)))
+                                .addComponent(jButtonCancela5)))
                         .addContainerGap())
                     .addGroup(AlteraComissaoLayout.createSequentialGroup()
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxNewComission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
-        AlteraComissaoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton4, jButton5});
+        AlteraComissaoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonCancela5, jButtonConfirma5});
 
         AlteraComissaoLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel19, jLabel20});
 
@@ -686,11 +698,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxNewComission, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
                 .addGroup(AlteraComissaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jButtonCancela5)
+                    .addComponent(jButtonConfirma5))
                 .addContainerGap())
         );
 
@@ -808,8 +820,65 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu4.setText("Outros");
 
-        jMenuRelátorios.setText("Relátorios");
-        jMenu4.add(jMenuRelátorios);
+        jMenu6.setText("Relatórios");
+
+        jMenuFaturamentoImobiliaria.setText("Faturamento Imobiliária");
+        jMenuFaturamentoImobiliaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFaturamentoImobiliariaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuFaturamentoImobiliaria);
+
+        jMenuLucroImobiliaria.setText("Lucro Imobiliária");
+        jMenuLucroImobiliaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuLucroImobiliariaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuLucroImobiliaria);
+
+        jMenuImovelVendido.setText("Imóveis Vendidos");
+        jMenuImovelVendido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuImovelVendidoActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuImovelVendido);
+
+        jMenuImovelEncalhado.setText("Imóveis Encalhados");
+        jMenuImovelEncalhado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuImovelEncalhadoActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuImovelEncalhado);
+
+        jMenuFaturamentoCorretor.setText("Faturamento Corretor");
+        jMenuFaturamentoCorretor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFaturamentoCorretorActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuFaturamentoCorretor);
+
+        jMenuPagamentoCorretor.setText("Pagamento Corretor");
+        jMenuPagamentoCorretor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuPagamentoCorretorActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuPagamentoCorretor);
+
+        jMenuCorretorDoMes.setText("Corretor do Mês");
+        jMenuCorretorDoMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuCorretorDoMesActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuCorretorDoMes);
+
+        jMenu4.add(jMenu6);
 
         jMenuBar1.add(jMenu4);
 
@@ -875,6 +944,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         try {
             objPrincipal.cadVenda(cod, valor, nomeComprador, data, corretor);
+            JOptionPane.showMessageDialog(this,"Venda cadastrada com sucesso!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
@@ -909,6 +979,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         try {
             objPrincipal.cadCorretorCT(nameCT, nCreciCT, salarioCT, dataCT);
+            JOptionPane.showMessageDialog(this,"Corretor contratado cadastrado com sucesso!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
@@ -942,6 +1013,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         try {
             objPrincipal.cadCorretorCM(nameCM, nCreciCM, comissionCM);
+            JOptionPane.showMessageDialog(this,"Corretor comissionado cadastrado com sucesso!");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex);
         }
@@ -956,18 +1028,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuCadastroCorretorCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCorretorCTActionPerformed
         // TODO add your handling code here:
+        jTextFieldNameCT.setText("");
+        jTextFieldNumberCT.setText("");
+        jTextFieldSalCT.setText("");
+        jTextField1DataCT.setText("");
+        
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaCadastroCT");
     }//GEN-LAST:event_jMenuCadastroCorretorCTActionPerformed
 
     private void jMenuCadastroCorretorCMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCadastroCorretorCMActionPerformed
         // TODO add your handling code here:
+        jTextFieldNameCM.setText("");
+        jTextFieldNumberCM.setText("");
+        jComboBoxComissao.setSelectedIndex(0);
+        
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaCadastroCM");
     }//GEN-LAST:event_jMenuCadastroCorretorCMActionPerformed
 
     private void jMenuAltSalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltSalActionPerformed
         // TODO add your handling code here:
+        jTextFieldNewPayment.setText("");
+        
+        
         ArrayList<Contratado> contratados = new ArrayList<Contratado>();
         int idx = 0;
 
@@ -988,7 +1072,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
         jComboBoxCorretoresCT.setModel(new javax.swing.DefaultComboBoxModel<>(listaCorretores));
-
+        jComboBoxCorretoresCT.setSelectedIndex(0);
+        
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaAlteraSalario");
     }//GEN-LAST:event_jMenuAltSalActionPerformed
@@ -999,6 +1084,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuCalculaSalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCalculaSalActionPerformed
         // TODO add your handling code here:
+        jTextAreaSalario.setText("");
+        jTextFieldMes.setText("");
+        jTextFieldAno.setText("");
+        
+        
         String[] listaCorretores = new String[corretores.size()];
         int idx = 0;
 
@@ -1008,13 +1098,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         }
         jComboBoxCorretores.setModel(new javax.swing.DefaultComboBoxModel<>(listaCorretores));
-
+        jComboBoxCorretores.setSelectedIndex(0);
+        
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaCalculaSalario");
     }//GEN-LAST:event_jMenuCalculaSalActionPerformed
 
     private void jMenuAltComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAltComActionPerformed
         // TODO add your handling code here:
+        jComboBoxNewComission.setSelectedIndex(0);     
+        
         ArrayList<Comissionado> comissionados = new ArrayList<Comissionado>();
 
         int idx = 0;
@@ -1036,7 +1129,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
 
         jComboBoxCorretoresCM.setModel(new javax.swing.DefaultComboBoxModel<>(listaCorretores));
-
+        jComboBoxCorretoresCM.setSelectedIndex(0);
+                
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaAlteraComissao");
     }//GEN-LAST:event_jMenuAltComActionPerformed
@@ -1101,6 +1195,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Corretor cor = objPrincipal.buscaCorretor(corretor);
 
             ((Contratado) cor).setSalarioFixo(novo_salario);
+            
+            try {
+                objPrincipal.getObjACtrCorretor().serializaCorretor();
+            } catch (Exception ex) {
+                
+            }
             jTextFieldNewPayment.setText("Salario alterado com sucesso!");
         }
 
@@ -1112,6 +1212,52 @@ public class TelaPrincipal extends javax.swing.JFrame {
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaDefault");
     }//GEN-LAST:event_jButtonCancela4ActionPerformed
+
+    private void jButtonConfirma5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma5ActionPerformed
+        // TODO add your handling code here:
+        String corretor = jComboBoxCorretoresCM.getItemAt(jComboBoxCorretoresCM.getSelectedIndex());
+        float nova_comissao = (float) (jComboBoxNewComission.getSelectedIndex() + 1) / 100;
+        
+        Corretor cor = objPrincipal.buscaCorretor(corretor);
+        
+        ((Comissionado) cor).setPercentualVenda(nova_comissao);
+        
+        try {
+            objPrincipal.getObjACtrCorretor().serializaCorretor();
+        } catch (Exception ex) {
+                
+        }
+
+        JOptionPane.showMessageDialog(this, "Comissão alterado com sucesso");
+    }//GEN-LAST:event_jButtonConfirma5ActionPerformed
+
+    private void jMenuLucroImobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuLucroImobiliariaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuLucroImobiliariaActionPerformed
+
+    private void jMenuImovelVendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuImovelVendidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuImovelVendidoActionPerformed
+
+    private void jMenuFaturamentoImobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFaturamentoImobiliariaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuFaturamentoImobiliariaActionPerformed
+
+    private void jMenuImovelEncalhadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuImovelEncalhadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuImovelEncalhadoActionPerformed
+
+    private void jMenuFaturamentoCorretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFaturamentoCorretorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuFaturamentoCorretorActionPerformed
+
+    private void jMenuPagamentoCorretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPagamentoCorretorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuPagamentoCorretorActionPerformed
+
+    private void jMenuCorretorDoMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCorretorDoMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuCorretorDoMesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1160,24 +1306,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel TelaDefault;
     private javax.swing.JPanel TelaPrincipal;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonCalculaSal;
     private javax.swing.JButton jButtonCancela1;
     private javax.swing.JButton jButtonCancela2;
     private javax.swing.JButton jButtonCancela3;
     private javax.swing.JButton jButtonCancela4;
+    private javax.swing.JButton jButtonCancela5;
     private javax.swing.JButton jButtonConfirma1;
     private javax.swing.JButton jButtonConfirma2;
     private javax.swing.JButton jButtonConfirma3;
     private javax.swing.JButton jButtonConfirma4;
+    private javax.swing.JButton jButtonConfirma5;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBoxComissao;
     private javax.swing.JComboBox<String> jComboBoxCorretorResponsavel;
     private javax.swing.JComboBox<String> jComboBoxCorretores;
     private javax.swing.JComboBox<String> jComboBoxCorretoresCM;
     private javax.swing.JComboBox<String> jComboBoxCorretoresCT;
+    private javax.swing.JComboBox<String> jComboBoxNewComission;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1203,6 +1349,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuItem jMenuAltCom;
     private javax.swing.JMenuItem jMenuAltSal;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1213,7 +1360,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuCadastroImovel;
     private javax.swing.JMenuItem jMenuCadastroVenda;
     private javax.swing.JMenuItem jMenuCalculaSal;
-    private javax.swing.JMenuItem jMenuRelátorios;
+    private javax.swing.JMenuItem jMenuCorretorDoMes;
+    private javax.swing.JMenuItem jMenuFaturamentoCorretor;
+    private javax.swing.JMenuItem jMenuFaturamentoImobiliaria;
+    private javax.swing.JMenuItem jMenuImovelEncalhado;
+    private javax.swing.JMenuItem jMenuImovelVendido;
+    private javax.swing.JMenuItem jMenuLucroImobiliaria;
+    private javax.swing.JMenuItem jMenuPagamentoCorretor;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
