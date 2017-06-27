@@ -89,6 +89,7 @@ public class ctrCorretor {
     
     
     public float calculaSalario(Corretor objCorretor, String pMes, String pAno) {
+        
         float salario = 0;
 
         if (objCorretor instanceof Contratado) {
@@ -108,7 +109,6 @@ public class ctrCorretor {
                 }
             }
 
-            salario += ((Contratado) objCorretor).getSalarioFixo();
         } else if (objCorretor instanceof Comissionado) {
 
             for (int idx = 0; idx < listaVendas.size(); idx++) {
