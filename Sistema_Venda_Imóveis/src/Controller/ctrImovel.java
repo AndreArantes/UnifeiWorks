@@ -7,21 +7,19 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 
 
 public class ctrImovel {
 
-    private ctrPrincipal objCtrPrincipal;
-    private Vector<Venda> listaVendas;
     private Vector<Imovel> Imoveis = new Vector<Imovel>();
     private Vector<Imovel> ImoveisVendidos = new Vector<Imovel>();
 
-    public ctrImovel(ctrPrincipal pCtr) throws Exception {
+    public ctrImovel() throws Exception {
         
-        objCtrPrincipal = pCtr;
-        listaVendas = objCtrPrincipal.getObjACtrVenda().getListaVendas();
         desserializaImovel();
         desserializaImovelVendido();
         
@@ -29,13 +27,23 @@ public class ctrImovel {
     }
 
     
-    public boolean cadImovel(String tipo, String cod){
+    public void cadImovel(String tipo, String cod, String descricao, String nomeProprietario, float valor, String pData) throws Exception{
         
-        return true;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date data = formato.parse(pData);
+        
+        if(Imoveis.add(new Imovel(tipo, cod, descricao, nomeProprietario, valor, data))){
+            serializaImovel();
+        } else{
+           throw new Exception("Error ao cadastrar imóvel!");     
+        }    
+        
     }
 
     public void vendeImovel(String codImovel) throws Exception {
-
+        
+        boolean testa = true;
+        
             for (int idx = 0; idx < Imoveis.size(); idx++) {
 
                 Imovel objImovel = (Imovel) Imoveis.get(idx);
@@ -46,11 +54,21 @@ public class ctrImovel {
                     Imoveis.remove(objImovel);
                     serializaImovel();
                     serializaImovelVendido();
-                    break;
+                    testa = true;
+                    
+                } else{
+                    
+                    testa = false;
+                    
                 }
+                
             }
             
-    throw new Exception("Imovel não encontrado!");
+            if(testa == true){
+                
+            } else if (testa == false){
+              throw new Exception("Imovel não encontrado!");
+            }          
     }
 
     private void serializaImovel() throws Exception {

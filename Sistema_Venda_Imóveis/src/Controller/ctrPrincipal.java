@@ -14,7 +14,7 @@ public class ctrPrincipal {
     public ctrPrincipal() throws Exception {
 
         objACtrVenda = new ctrVenda(this);
-        objACtrImovel = new ctrImovel(this);
+        objACtrImovel = new ctrImovel( );
         objACtrCorretor = new ctrCorretor(this);
 
         objALimPrincipal = new TelaPrincipal(this);
@@ -32,6 +32,10 @@ public class ctrPrincipal {
         return objACtrCorretor;
     }
 
+    public void cadImovel(String tipo, String cod, String descricao, String nomeProprietario, float valor, String pData) throws Exception{
+        objACtrImovel.cadImovel(tipo, cod, descricao, nomeProprietario, valor, pData);
+    }
+    
     public void cadCorretorCT(String nome, String CRECI, float salariofixo, String pData) throws Exception {
         objACtrCorretor.cadCorretorCT(nome, CRECI, salariofixo, pData);
 

@@ -11,6 +11,7 @@ import Controller.ctrPrincipal;
 import Model.Comissionado;
 import Model.Contratado;
 import Model.Corretor;
+import Model.Imovel;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,10 +26,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     ctrPrincipal objPrincipal;
     Vector<Corretor> corretores;
+    Vector<Imovel> imoveis;
 
     public TelaPrincipal(ctrPrincipal pCtr) {
         objPrincipal = pCtr;
         corretores = objPrincipal.getObjACtrCorretor().getListaCorretor();
+        imoveis = objPrincipal.getObjCtrImovel().getListagemImovel();
         this.setVisible(true);
         initComponents();
     }
@@ -71,11 +74,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaPrincipal = new javax.swing.JPanel();
         TelaDefault = new javax.swing.JPanel();
         CadastroImovel = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jTextFieldCodigo = new javax.swing.JTextField();
+        jTextFieldNomeProprietario = new javax.swing.JTextField();
+        jTextFieldDescricao = new javax.swing.JTextField();
+        jTextFieldValor = new javax.swing.JTextField();
+        jButtonCadastraImovel = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
+        jFormattedTextFieldData = new javax.swing.JFormattedTextField();
+        jComboBoxTipoImovel = new javax.swing.JComboBox<>();
         BuscaImovel = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jComboBoxTipoImoveis = new javax.swing.JComboBox<>();
+        jButtonBuscaImovel = new javax.swing.JButton();
         CadastroVenda = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldCodImovel = new javax.swing.JTextField();
@@ -133,8 +148,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jComboBoxNewComission = new javax.swing.JComboBox<>();
         jButtonCancela5 = new javax.swing.JButton();
         jButtonConfirma5 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        FaturamentoImobiliaria = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaFaturamentoImobiliaria = new javax.swing.JTextArea();
+        LucroImobiliaria = new javax.swing.JPanel();
+        ImovelVendido = new javax.swing.JPanel();
+        ImovelEncalhado = new javax.swing.JPanel();
+        FaturamentoCorretor = new javax.swing.JPanel();
+        PagamentoCorretor = new javax.swing.JPanel();
+        CorretorDoMes = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuBusca = new javax.swing.JMenu();
         jMenuBuscaImovel = new javax.swing.JMenuItem();
@@ -176,9 +199,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         TelaPrincipal.add(TelaDefault, "TelaDefault");
 
-        jLabel6.setText("jLabel6");
+        jLabel21.setText("Tipo:");
 
-        jTextField1.setText("jTextField1");
+        jLabel22.setText("Código:");
+
+        jLabel23.setText("Descrição:");
+
+        jLabel24.setText("Nome Proprietário:");
+
+        jLabel25.setText("Valor:");
+
+        jButtonCadastraImovel.setText("Cadastrar");
+        jButtonCadastraImovel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadastraImovelActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cancela");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel26.setText("Data:");
+
+        try {
+            jFormattedTextFieldData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jComboBoxTipoImovel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casa", "Apartamento", "Sala comercial", "Lote", "Chácara", "Sítio", "Fazenda" }));
 
         javax.swing.GroupLayout CadastroImovelLayout = new javax.swing.GroupLayout(CadastroImovel);
         CadastroImovel.setLayout(CadastroImovelLayout);
@@ -186,26 +239,90 @@ public class TelaPrincipal extends javax.swing.JFrame {
             CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CadastroImovelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addGroup(CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CadastroImovelLayout.createSequentialGroup()
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxTipoImovel, 0, 535, Short.MAX_VALUE))
+                    .addGroup(CadastroImovelLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldCodigo))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroImovelLayout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldDescricao))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroImovelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonCadastraImovel)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addGroup(CadastroImovelLayout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNomeProprietario))
+                    .addGroup(CadastroImovelLayout.createSequentialGroup()
+                        .addComponent(jLabel25)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldValor))
+                    .addGroup(CadastroImovelLayout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldData)))
+                .addContainerGap())
         );
+
+        CadastroImovelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel21, jLabel22, jLabel23, jLabel24, jLabel25, jLabel26});
+
+        CadastroImovelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButtonCadastraImovel});
+
         CadastroImovelLayout.setVerticalGroup(
             CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CadastroImovelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(382, Short.MAX_VALUE))
+                    .addComponent(jComboBoxTipoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addGap(18, 18, 18)
+                .addGroup(CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(jTextFieldCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jTextFieldNomeProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(jTextFieldValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                .addGroup(CadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButtonCadastraImovel))
+                .addContainerGap())
         );
 
         TelaPrincipal.add(CadastroImovel, "TelaCadastroImovel");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        for(Imovel i: imoveis){
+            String tipoImovel = i.getTipo();
+            jComboBoxTipoImoveis.addItem(tipoImovel);
+        }
 
-        jButton1.setText("jButton1");
+        jButtonBuscaImovel.setText("Buscar");
+        jButtonBuscaImovel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscaImovelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout BuscaImovelLayout = new javax.swing.GroupLayout(BuscaImovel);
         BuscaImovel.setLayout(BuscaImovelLayout);
@@ -213,9 +330,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             BuscaImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BuscaImovelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, 0, 565, Short.MAX_VALUE)
+                .addComponent(jComboBoxTipoImoveis, 0, 571, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonBuscaImovel)
                 .addContainerGap())
         );
         BuscaImovelLayout.setVerticalGroup(
@@ -223,8 +340,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             .addGroup(BuscaImovelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BuscaImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jComboBoxTipoImoveis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBuscaImovel))
                 .addContainerGap(374, Short.MAX_VALUE))
         );
 
@@ -708,31 +825,124 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         TelaPrincipal.add(AlteraComissao, "TelaAlteraComissao");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Faturamento do Mês"));
+
+        jTextAreaFaturamentoImobiliaria.setColumns(20);
+        jTextAreaFaturamentoImobiliaria.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaFaturamentoImobiliaria);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout FaturamentoImobiliariaLayout = new javax.swing.GroupLayout(FaturamentoImobiliaria);
+        FaturamentoImobiliaria.setLayout(FaturamentoImobiliariaLayout);
+        FaturamentoImobiliariaLayout.setHorizontalGroup(
+            FaturamentoImobiliariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FaturamentoImobiliariaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        FaturamentoImobiliariaLayout.setVerticalGroup(
+            FaturamentoImobiliariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FaturamentoImobiliariaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        TelaPrincipal.add(FaturamentoImobiliaria, "FaturamentoImobialiaria");
+
+        javax.swing.GroupLayout LucroImobiliariaLayout = new javax.swing.GroupLayout(LucroImobiliaria);
+        LucroImobiliaria.setLayout(LucroImobiliariaLayout);
+        LucroImobiliariaLayout.setHorizontalGroup(
+            LucroImobiliariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 660, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        LucroImobiliariaLayout.setVerticalGroup(
+            LucroImobiliariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 412, Short.MAX_VALUE)
         );
 
-        TelaPrincipal.add(jPanel4, "card11");
+        TelaPrincipal.add(LucroImobiliaria, "LucroImobiliaria");
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout ImovelVendidoLayout = new javax.swing.GroupLayout(ImovelVendido);
+        ImovelVendido.setLayout(ImovelVendidoLayout);
+        ImovelVendidoLayout.setHorizontalGroup(
+            ImovelVendidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 660, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ImovelVendidoLayout.setVerticalGroup(
+            ImovelVendidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 412, Short.MAX_VALUE)
         );
 
-        TelaPrincipal.add(jPanel5, "card12");
+        TelaPrincipal.add(ImovelVendido, "ImovelVendido");
+
+        javax.swing.GroupLayout ImovelEncalhadoLayout = new javax.swing.GroupLayout(ImovelEncalhado);
+        ImovelEncalhado.setLayout(ImovelEncalhadoLayout);
+        ImovelEncalhadoLayout.setHorizontalGroup(
+            ImovelEncalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
+        );
+        ImovelEncalhadoLayout.setVerticalGroup(
+            ImovelEncalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 412, Short.MAX_VALUE)
+        );
+
+        TelaPrincipal.add(ImovelEncalhado, "ImovelEncalhado");
+
+        javax.swing.GroupLayout FaturamentoCorretorLayout = new javax.swing.GroupLayout(FaturamentoCorretor);
+        FaturamentoCorretor.setLayout(FaturamentoCorretorLayout);
+        FaturamentoCorretorLayout.setHorizontalGroup(
+            FaturamentoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
+        );
+        FaturamentoCorretorLayout.setVerticalGroup(
+            FaturamentoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 412, Short.MAX_VALUE)
+        );
+
+        TelaPrincipal.add(FaturamentoCorretor, "FaturamentoCorretor");
+
+        javax.swing.GroupLayout PagamentoCorretorLayout = new javax.swing.GroupLayout(PagamentoCorretor);
+        PagamentoCorretor.setLayout(PagamentoCorretorLayout);
+        PagamentoCorretorLayout.setHorizontalGroup(
+            PagamentoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
+        );
+        PagamentoCorretorLayout.setVerticalGroup(
+            PagamentoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 412, Short.MAX_VALUE)
+        );
+
+        TelaPrincipal.add(PagamentoCorretor, "PagamentoCorretor");
+
+        javax.swing.GroupLayout CorretorDoMesLayout = new javax.swing.GroupLayout(CorretorDoMes);
+        CorretorDoMes.setLayout(CorretorDoMesLayout);
+        CorretorDoMesLayout.setHorizontalGroup(
+            CorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
+        );
+        CorretorDoMesLayout.setVerticalGroup(
+            CorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 412, Short.MAX_VALUE)
+        );
+
+        TelaPrincipal.add(CorretorDoMes, "CorretorDoMes");
 
         jMenuBusca.setText("Imóveis");
 
@@ -930,12 +1140,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuBuscaImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBuscaImovelActionPerformed
         // TODO add your handling code here:
+        
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaBusca");
     }//GEN-LAST:event_jMenuBuscaImovelActionPerformed
 
     private void jButtonConfirma1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma1ActionPerformed
         // TODO add your handling code here:
+        
+        if(jTextFieldCodImovel.getText().equalsIgnoreCase("") || jTextFieldValorVenda.getText().equalsIgnoreCase("") 
+               || jTextFieldNomeComprador.getText().equalsIgnoreCase("") || jTextFieldDataVenda.getText().equalsIgnoreCase("  /  /    ")){
+            
+            JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente");
+           
+            jTextFieldCodImovel.setText("");
+            jTextFieldValorVenda.setText("");
+            jTextFieldNomeComprador.setText("");
+            jTextFieldDataVenda.setText("");
+            jComboBoxCorretorResponsavel.setSelectedIndex(0);
+            
+        }else{
+        
         String cod = jTextFieldCodImovel.getText();
         float valor = Float.parseFloat(jTextFieldValorVenda.getText());
         String nomeComprador = jTextFieldNomeComprador.getText();
@@ -954,7 +1179,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jTextFieldNomeComprador.setText("");
         jTextFieldDataVenda.setText("");
         jComboBoxCorretorResponsavel.setSelectedIndex(0);
-        
+        }
 
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaCadastroVenda");
@@ -1259,6 +1484,57 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuCorretorDoMesActionPerformed
 
+    private void jButtonCadastraImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraImovelActionPerformed
+
+        if(jTextFieldCodigo.getText().equalsIgnoreCase("") || jTextFieldDescricao.getText().equalsIgnoreCase("")
+            || jTextFieldDescricao.getText().equalsIgnoreCase("") || jTextFieldNomeProprietario.getText().equalsIgnoreCase("")
+            ||  jTextFieldValor.getText().equalsIgnoreCase("") || jFormattedTextFieldData.getText().equalsIgnoreCase("")){
+            
+            JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente!");
+            
+            jTextFieldCodigo.setText("");
+            jComboBoxTipoImovel.setSelectedIndex(0);
+            jTextFieldDescricao.setText("");
+            jTextFieldNomeProprietario.setText("");
+            jTextFieldValor.setText("");
+            jFormattedTextFieldData.setText("");
+            
+        } else{
+        
+        String nCodigo = jTextFieldCodigo.getText();
+        String nTipo = jComboBoxTipoImovel.getItemAt(jComboBoxTipoImovel.getSelectedIndex());
+        String nDescricao = jTextFieldDescricao.getText();
+        String nNomeProp = jTextFieldNomeProprietario.getText();
+        float nValor = Float.parseFloat(jTextFieldValor.getText());
+        String nData = jFormattedTextFieldData.getText();
+
+        try {
+            objPrincipal.cadImovel(nTipo, nCodigo, nDescricao, nNomeProp, nValor, nData);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }
+            jTextFieldCodigo.setText("");
+            jComboBoxTipoImovel.setSelectedIndex(0);
+            jTextFieldDescricao.setText("");
+            jTextFieldNomeProprietario.setText("");
+            jTextFieldValor.setText("");
+            jFormattedTextFieldData.setText("");
+        
+        }
+        
+        CardLayout voltaDefault = (CardLayout) TelaPrincipal.getLayout();
+        voltaDefault.show(TelaPrincipal, "TelaCadastroImovel");
+
+    }//GEN-LAST:event_jButtonCadastraImovelActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonBuscaImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaImovelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonBuscaImovelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1303,9 +1579,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel CadastroImovel;
     private javax.swing.JPanel CadastroVenda;
     private javax.swing.JPanel CalculaSalario;
+    private javax.swing.JPanel CorretorDoMes;
+    private javax.swing.JPanel FaturamentoCorretor;
+    private javax.swing.JPanel FaturamentoImobiliaria;
+    private javax.swing.JPanel ImovelEncalhado;
+    private javax.swing.JPanel ImovelVendido;
+    private javax.swing.JPanel LucroImobiliaria;
+    private javax.swing.JPanel PagamentoCorretor;
     private javax.swing.JPanel TelaDefault;
     private javax.swing.JPanel TelaPrincipal;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonBuscaImovel;
+    private javax.swing.JButton jButtonCadastraImovel;
     private javax.swing.JButton jButtonCalculaSal;
     private javax.swing.JButton jButtonCancela1;
     private javax.swing.JButton jButtonCancela2;
@@ -1317,13 +1602,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonConfirma3;
     private javax.swing.JButton jButtonConfirma4;
     private javax.swing.JButton jButtonConfirma5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxComissao;
     private javax.swing.JComboBox<String> jComboBoxCorretorResponsavel;
     private javax.swing.JComboBox<String> jComboBoxCorretores;
     private javax.swing.JComboBox<String> jComboBoxCorretoresCM;
     private javax.swing.JComboBox<String> jComboBoxCorretoresCT;
     private javax.swing.JComboBox<String> jComboBoxNewComission;
+    private javax.swing.JComboBox<String> jComboBoxTipoImoveis;
+    private javax.swing.JComboBox<String> jComboBoxTipoImovel;
+    private javax.swing.JFormattedTextField jFormattedTextFieldData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1337,10 +1624,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1367,23 +1659,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuImovelVendido;
     private javax.swing.JMenuItem jMenuLucroImobiliaria;
     private javax.swing.JMenuItem jMenuPagamentoCorretor;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextAreaFaturamentoImobiliaria;
     private javax.swing.JTextArea jTextAreaSalario;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JFormattedTextField jTextField1DataCT;
     private javax.swing.JTextField jTextFieldAno;
     private javax.swing.JTextField jTextFieldCodImovel;
+    private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JFormattedTextField jTextFieldDataVenda;
+    private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldMes;
     private javax.swing.JTextField jTextFieldNameCM;
     private javax.swing.JTextField jTextFieldNameCT;
     private javax.swing.JTextField jTextFieldNewPayment;
     private javax.swing.JTextField jTextFieldNomeComprador;
+    private javax.swing.JTextField jTextFieldNomeProprietario;
     private javax.swing.JTextField jTextFieldNumberCM;
     private javax.swing.JTextField jTextFieldNumberCT;
     private javax.swing.JTextField jTextFieldSalCT;
+    private javax.swing.JTextField jTextFieldValor;
     private javax.swing.JTextField jTextFieldValorVenda;
     // End of variables declaration//GEN-END:variables
 }
