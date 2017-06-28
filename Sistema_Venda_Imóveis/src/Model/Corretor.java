@@ -23,5 +23,4 @@ public class Corretor implements Serializable{
     public String toString() {
         return getNome();
     }
-    
 }
