@@ -7,7 +7,6 @@
  */
 package View;
 
-import Controller.ctrCorretor;
 import Controller.ctrPrincipal;
 import Model.Comissionado;
 import Model.Contratado;
@@ -159,63 +158,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jButtonConfirma5 = new javax.swing.JButton();
         FaturamentoImobiliaria = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel38 = new javax.swing.JLabel();
-        jTextFieldMesFaturamentoImobiliaria = new javax.swing.JTextField();
-        jLabel39 = new javax.swing.JLabel();
-        jTextFieldAnoFaturamentoImobiliaria = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaFaturamentoMes = new javax.swing.JTextArea();
-        jButtonConfirmarFaturamentoImobi = new javax.swing.JButton();
+        jTextAreaFaturamentoImobiliaria = new javax.swing.JTextArea();
         LucroImobiliaria = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextFieldMesLucro = new javax.swing.JTextField();
-        jLabel27 = new javax.swing.JLabel();
-        jTextFieldAnoLucro = new javax.swing.JTextField();
-        jButtonConfirmaLucro = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextAreaLucro = new javax.swing.JTextArea();
         ImovelVendido = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel28 = new javax.swing.JLabel();
-        jTextFieldMesVendidos = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
-        jTextFieldAnoVendidos = new javax.swing.JTextField();
-        jButtonConfirmaVendidos = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextAreaVendidos = new javax.swing.JTextArea();
         ImovelEncalhado = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        jTextFieldMesEncalhados = new javax.swing.JTextField();
-        jLabel31 = new javax.swing.JLabel();
-        jTextFieldAnoEncalhados = new javax.swing.JTextField();
-        jButtonConfimaEncalhados = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextAreaEncalhados = new javax.swing.JTextArea();
         FaturamentoCorretor = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel32 = new javax.swing.JLabel();
-        jTextFieldMesCorretores = new javax.swing.JTextField();
-        jButtonConfirmaCorretores = new javax.swing.JButton();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTextAreaFaturaCorretores = new javax.swing.JTextArea();
         PagamentoCorretor = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel34 = new javax.swing.JLabel();
-        jTextFieldMesCorretorePag = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
-        jTextFieldAnoCorretoresPag = new javax.swing.JTextField();
-        jButtonConfirmaCorretoresPag = new javax.swing.JButton();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        jTextAreaCorretoresPag = new javax.swing.JTextArea();
         CorretorDoMes = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
-        jTextFieldMesCorretor = new javax.swing.JTextField();
-        jButtonConfirmaCorretorMes = new javax.swing.JButton();
-        jScrollPane9 = new javax.swing.JScrollPane();
-        jTextAreaCorretorMes = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuBusca = new javax.swing.JMenu();
         jMenuBuscaImovel = new javax.swing.JMenuItem();
@@ -590,11 +540,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(CadastroCorretorCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroCorretorCTLayout.createSequentialGroup()
-<<<<<<< HEAD
                         .addGap(0, 466, Short.MAX_VALUE)
-=======
-                        .addGap(0, 462, Short.MAX_VALUE)
->>>>>>> master
                         .addComponent(jButtonConfirma2)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCancela2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -933,22 +879,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         TelaPrincipal.add(AlteraComissao, "TelaAlteraComissao");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Faturamento do Mês", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Faturamento do Mês"));
 
-        jLabel38.setText("Mês:");
-
-        jLabel39.setText("Ano:");
-
-        jTextAreaFaturamentoMes.setColumns(20);
-        jTextAreaFaturamentoMes.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaFaturamentoMes);
-
-        jButtonConfirmarFaturamentoImobi.setText("Confirmar");
-        jButtonConfirmarFaturamentoImobi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarFaturamentoImobiActionPerformed(evt);
-            }
-        });
+        jTextAreaFaturamentoImobiliaria.setColumns(20);
+        jTextAreaFaturamentoImobiliaria.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaFaturamentoImobiliaria);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -956,40 +891,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel38)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldMesFaturamentoImobiliaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel39)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldAnoFaturamentoImobiliaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonConfirmarFaturamentoImobi)
-                        .addGap(0, 253, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonConfirmarFaturamentoImobi, jTextFieldAnoFaturamentoImobiliaria, jTextFieldMesFaturamentoImobiliaria});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
-                    .addComponent(jTextFieldMesFaturamentoImobiliaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel39)
-                    .addComponent(jTextFieldAnoFaturamentoImobiliaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmarFaturamentoImobi))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonConfirmarFaturamentoImobi, jTextFieldAnoFaturamentoImobiliaria, jTextFieldMesFaturamentoImobiliaria});
 
         javax.swing.GroupLayout FaturamentoImobiliariaLayout = new javax.swing.GroupLayout(FaturamentoImobiliaria);
         FaturamentoImobiliaria.setLayout(FaturamentoImobiliariaLayout);
@@ -1008,465 +918,85 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        TelaPrincipal.add(FaturamentoImobiliaria, "FaturamentoImobiliario");
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lucro da Imobiliária", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jLabel6.setText("Mês:");
-
-        jLabel27.setText("Ano:");
-
-        jButtonConfirmaLucro.setText("Confirmar");
-        jButtonConfirmaLucro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmaLucroActionPerformed(evt);
-            }
-        });
-
-        jTextAreaLucro.setColumns(20);
-        jTextAreaLucro.setRows(5);
-        jScrollPane4.setViewportView(jTextAreaLucro);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldMesLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel27)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldAnoLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonConfirmaLucro)
-                        .addGap(0, 253, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonConfirmaLucro, jTextFieldAnoLucro, jTextFieldMesLucro});
-
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextFieldMesLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27)
-                    .addComponent(jTextFieldAnoLucro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmaLucro))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonConfirmaLucro, jTextFieldAnoLucro, jTextFieldMesLucro});
+        TelaPrincipal.add(FaturamentoImobiliaria, "FaturamentoImobialiaria");
 
         javax.swing.GroupLayout LucroImobiliariaLayout = new javax.swing.GroupLayout(LucroImobiliaria);
         LucroImobiliaria.setLayout(LucroImobiliariaLayout);
         LucroImobiliariaLayout.setHorizontalGroup(
             LucroImobiliariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LucroImobiliariaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 660, Short.MAX_VALUE)
         );
         LucroImobiliariaLayout.setVerticalGroup(
             LucroImobiliariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(LucroImobiliariaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
         TelaPrincipal.add(LucroImobiliaria, "LucroImobiliaria");
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Imóveis Vendidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jLabel28.setText("Mês:");
-
-        jLabel29.setText("Ano:");
-
-        jTextFieldAnoVendidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAnoVendidosActionPerformed(evt);
-            }
-        });
-
-        jButtonConfirmaVendidos.setText("Confirmar");
-        jButtonConfirmaVendidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmaVendidosActionPerformed(evt);
-            }
-        });
-
-        jTextAreaVendidos.setColumns(20);
-        jTextAreaVendidos.setRows(5);
-        jScrollPane5.setViewportView(jTextAreaVendidos);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel28)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldMesVendidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel29)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldAnoVendidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonConfirmaVendidos)
-                        .addGap(0, 253, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonConfirmaVendidos, jTextFieldAnoVendidos, jTextFieldMesVendidos});
-
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel28)
-                    .addComponent(jTextFieldMesVendidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29)
-                    .addComponent(jTextFieldAnoVendidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmaVendidos))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonConfirmaVendidos, jTextFieldAnoVendidos, jTextFieldMesVendidos});
 
         javax.swing.GroupLayout ImovelVendidoLayout = new javax.swing.GroupLayout(ImovelVendido);
         ImovelVendido.setLayout(ImovelVendidoLayout);
         ImovelVendidoLayout.setHorizontalGroup(
             ImovelVendidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ImovelVendidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 660, Short.MAX_VALUE)
         );
         ImovelVendidoLayout.setVerticalGroup(
             ImovelVendidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ImovelVendidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
         TelaPrincipal.add(ImovelVendido, "ImovelVendido");
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Imóveis Encalhados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jLabel30.setText("Mês:");
-
-        jLabel31.setText("Ano:");
-
-        jButtonConfimaEncalhados.setText("Confirmar");
-        jButtonConfimaEncalhados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfimaEncalhadosActionPerformed(evt);
-            }
-        });
-
-        jTextAreaEncalhados.setColumns(20);
-        jTextAreaEncalhados.setRows(5);
-        jScrollPane6.setViewportView(jTextAreaEncalhados);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane6)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel30)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldMesEncalhados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel31)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldAnoEncalhados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonConfimaEncalhados)
-                        .addGap(0, 253, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonConfimaEncalhados, jTextFieldAnoEncalhados, jTextFieldMesEncalhados});
-
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel30)
-                    .addComponent(jTextFieldMesEncalhados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31)
-                    .addComponent(jTextFieldAnoEncalhados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfimaEncalhados))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel4Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonConfimaEncalhados, jTextFieldAnoEncalhados, jTextFieldMesEncalhados});
 
         javax.swing.GroupLayout ImovelEncalhadoLayout = new javax.swing.GroupLayout(ImovelEncalhado);
         ImovelEncalhado.setLayout(ImovelEncalhadoLayout);
         ImovelEncalhadoLayout.setHorizontalGroup(
             ImovelEncalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ImovelEncalhadoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 660, Short.MAX_VALUE)
         );
         ImovelEncalhadoLayout.setVerticalGroup(
             ImovelEncalhadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ImovelEncalhadoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
         TelaPrincipal.add(ImovelEncalhado, "ImovelEncalhado");
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Faturamento dos Corretores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jLabel32.setText("Mês:");
-
-        jButtonConfirmaCorretores.setText("Confirmar");
-        jButtonConfirmaCorretores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmaCorretoresActionPerformed(evt);
-            }
-        });
-
-        jTextAreaFaturaCorretores.setColumns(20);
-        jTextAreaFaturaCorretores.setRows(5);
-        jScrollPane7.setViewportView(jTextAreaFaturaCorretores);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel32)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldMesCorretores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonConfirmaCorretores)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonConfirmaCorretores, jTextFieldMesCorretores});
-
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel32)
-                    .addComponent(jTextFieldMesCorretores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmaCorretores))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonConfirmaCorretores, jTextFieldMesCorretores});
 
         javax.swing.GroupLayout FaturamentoCorretorLayout = new javax.swing.GroupLayout(FaturamentoCorretor);
         FaturamentoCorretor.setLayout(FaturamentoCorretorLayout);
         FaturamentoCorretorLayout.setHorizontalGroup(
             FaturamentoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FaturamentoCorretorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 660, Short.MAX_VALUE)
         );
         FaturamentoCorretorLayout.setVerticalGroup(
             FaturamentoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FaturamentoCorretorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
-        TelaPrincipal.add(FaturamentoCorretor, "FaturamentodoCorretor");
-
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pagamento dos Corretores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jLabel34.setText("Mês:");
-
-        jTextFieldMesCorretorePag.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldMesCorretorePagActionPerformed(evt);
-            }
-        });
-
-        jLabel35.setText("Ano:");
-
-        jButtonConfirmaCorretoresPag.setText("Confirmar");
-        jButtonConfirmaCorretoresPag.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmaCorretoresPagActionPerformed(evt);
-            }
-        });
-
-        jTextAreaCorretoresPag.setColumns(20);
-        jTextAreaCorretoresPag.setRows(5);
-        jScrollPane8.setViewportView(jTextAreaCorretoresPag);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel34)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldMesCorretorePag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel35)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldAnoCorretoresPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonConfirmaCorretoresPag)
-                        .addGap(0, 253, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonConfirmaCorretoresPag, jTextFieldAnoCorretoresPag, jTextFieldMesCorretorePag});
-
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel34)
-                    .addComponent(jTextFieldMesCorretorePag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel35)
-                    .addComponent(jTextFieldAnoCorretoresPag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmaCorretoresPag))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonConfirmaCorretoresPag, jTextFieldAnoCorretoresPag, jTextFieldMesCorretorePag});
+        TelaPrincipal.add(FaturamentoCorretor, "FaturamentoCorretor");
 
         javax.swing.GroupLayout PagamentoCorretorLayout = new javax.swing.GroupLayout(PagamentoCorretor);
         PagamentoCorretor.setLayout(PagamentoCorretorLayout);
         PagamentoCorretorLayout.setHorizontalGroup(
             PagamentoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PagamentoCorretorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 660, Short.MAX_VALUE)
         );
         PagamentoCorretorLayout.setVerticalGroup(
             PagamentoCorretorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PagamentoCorretorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
         TelaPrincipal.add(PagamentoCorretor, "PagamentoCorretor");
-
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Corretor do Mês", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
-
-        jLabel36.setText("Mês:");
-
-        jButtonConfirmaCorretorMes.setText("Confirmar");
-        jButtonConfirmaCorretorMes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmaCorretorMesActionPerformed(evt);
-            }
-        });
-
-        jTextAreaCorretorMes.setColumns(20);
-        jTextAreaCorretorMes.setRows(5);
-        jScrollPane9.setViewportView(jTextAreaCorretorMes);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel36)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldMesCorretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonConfirmaCorretorMes)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jPanel7Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonConfirmaCorretorMes, jTextFieldMesCorretor});
-
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(jTextFieldMesCorretor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonConfirmaCorretorMes))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jPanel7Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonConfirmaCorretorMes, jTextFieldMesCorretor});
 
         javax.swing.GroupLayout CorretorDoMesLayout = new javax.swing.GroupLayout(CorretorDoMes);
         CorretorDoMes.setLayout(CorretorDoMesLayout);
         CorretorDoMesLayout.setHorizontalGroup(
             CorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CorretorDoMesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 660, Short.MAX_VALUE)
         );
         CorretorDoMesLayout.setVerticalGroup(
             CorretorDoMesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CorretorDoMesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 412, Short.MAX_VALUE)
         );
 
-        TelaPrincipal.add(CorretorDoMes, "CorretordoMes");
+        TelaPrincipal.add(CorretorDoMes, "CorretorDoMes");
 
         jMenuBusca.setText("Imóveis");
 
@@ -2005,58 +1535,31 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConfirma5ActionPerformed
 
     private void jMenuLucroImobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuLucroImobiliariaActionPerformed
-        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal, "LucroImobiliaria");
-        jTextFieldMesLucro.setText("");
-        jTextFieldAnoLucro.setText("");
-        jTextAreaLucro.setText("");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuLucroImobiliariaActionPerformed
 
     private void jMenuImovelVendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuImovelVendidoActionPerformed
-        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal, "ImovelVendido");
-        jTextFieldMesVendidos.setText("");
-        jTextFieldAnoVendidos.setText("");
-        jTextAreaVendidos.setText("");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuImovelVendidoActionPerformed
 
     private void jMenuFaturamentoImobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFaturamentoImobiliariaActionPerformed
-        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal, "FaturamentoImobiliario");
-        jTextFieldMesFaturamentoImobiliaria.setText("");
-        jTextFieldAnoFaturamentoImobiliaria.setText("");
-        jTextAreaFaturamentoMes.setText("");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuFaturamentoImobiliariaActionPerformed
 
     private void jMenuImovelEncalhadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuImovelEncalhadoActionPerformed
-        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal, "ImovelEncalhado");
-        jTextFieldMesEncalhados.setText("");
-        jTextFieldAnoEncalhados.setText("");
-        jTextAreaEncalhados.setText("");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuImovelEncalhadoActionPerformed
 
     private void jMenuFaturamentoCorretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFaturamentoCorretorActionPerformed
-        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal, "FaturamentodoCorretor");
-        jTextFieldMesCorretores.setText("");
-
-        jTextAreaFaturaCorretores.setText("");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuFaturamentoCorretorActionPerformed
 
     private void jMenuPagamentoCorretorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuPagamentoCorretorActionPerformed
-        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal, "PagamentoCorretor");
-        jTextFieldMesCorretorePag.setText("");
-        jTextFieldAnoCorretoresPag.setText("");
-        jTextAreaCorretoresPag.setText("");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuPagamentoCorretorActionPerformed
 
     private void jMenuCorretorDoMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCorretorDoMesActionPerformed
-        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
-        card.show(TelaPrincipal, "CorretordoMes");
-        jTextFieldMesCorretor.setText("");
-        jTextAreaCorretorMes.setText("");
+        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuCorretorDoMesActionPerformed
 
     private void jButtonCadastraImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastraImovelActionPerformed
@@ -2156,13 +1659,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxCorretoresActionPerformed
 
     private void jButtonCancela5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancela5ActionPerformed
-
+        // TODO add your handling code here:
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaDefault");
     }//GEN-LAST:event_jButtonCancela5ActionPerformed
 
     private void jComboBoxTipoImoveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTipoImoveisActionPerformed
-
+        // TODO add your handling code here:
         DefaultTableModel tableImoveis = (DefaultTableModel) jTableImóveis.getModel();
         tableImoveis.setNumRows(0);
 
@@ -2186,7 +1689,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxTipoImoveisActionPerformed
 
     private void jButtonEditaImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditaImovelActionPerformed
-<<<<<<< HEAD
         // TODO add your handling code here:
         if (jTableImóveis.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Nenhum imovel foi selecionado!");
@@ -2206,9 +1708,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaBusca");
-=======
-
->>>>>>> master
     }//GEN-LAST:event_jButtonEditaImovelActionPerformed
 
     private void jButtonExcluiImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluiImovelActionPerformed
@@ -2230,128 +1729,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         card.show(TelaPrincipal, "TelaBusca");
     }//GEN-LAST:event_jButtonExcluiImovelActionPerformed
 
-<<<<<<< HEAD
     private void jTableImóveisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableImóveisMouseClicked
     }//GEN-LAST:event_jTableImóveisMouseClicked
 
     private void jComboBoxCorretoresCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCorretoresCTActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxCorretoresCTActionPerformed
-=======
-    private void jButtonConfirmarFaturamentoImobiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarFaturamentoImobiActionPerformed
-        String mes = "";
-        String ano = "";
-        String auxVendas = "";
-        String auxString = "";
-        float recebeFaturamento;
-        mes = jTextFieldMesFaturamentoImobiliaria.getText();
-        ano = jTextFieldAnoFaturamentoImobiliaria.getText();
-        recebeFaturamento = objPrincipal.getObjACtrVenda().calculaFaturamento(mes, ano);
-        auxVendas = objPrincipal.getObjACtrVenda().imprimeListaVendas(mes, ano);
-
-        auxString = String.valueOf(recebeFaturamento);
-        jTextAreaFaturamentoMes.setText("Faturamento Mensal" + "\n" + auxVendas + "\n" + "Faturamento:  " + auxString);
-
-    }//GEN-LAST:event_jButtonConfirmarFaturamentoImobiActionPerformed
-
-    private void jButtonConfirmaLucroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmaLucroActionPerformed
-        String mes = "";
-        String ano = "";
-        String auxVendas = "";
-        String auxString = "";
-        float recebeLucro;
-        mes = jTextFieldMesLucro.getText();
-        ano = jTextFieldAnoLucro.getText();
-        recebeLucro = objPrincipal.getObjACtrCorretor().calculaLucro(mes, ano);
-        auxVendas = objPrincipal.getObjACtrVenda().imprimeListaVendas(mes, ano);
-
-        auxString = String.valueOf(recebeLucro);
-        jTextAreaLucro.setText("Imóveis Vendidos" + "\n" + auxVendas + "\n" + "Lucro total:  " + auxString);
-
-
-    }//GEN-LAST:event_jButtonConfirmaLucroActionPerformed
-
-    private void jButtonConfirmaVendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmaVendidosActionPerformed
-        String mes = "";
-        String ano = "";
-        String auxVendidos = "";
-
-        mes = jTextFieldMesVendidos.getText();
-        ano = jTextFieldAnoVendidos.getText();
-        auxVendidos = objPrincipal.getObjACtrVenda().imprimeListaVendas(mes, ano);
-
-        jTextAreaVendidos.setText("Imóveis Vendidos" + "\n" + auxVendidos);
-    }//GEN-LAST:event_jButtonConfirmaVendidosActionPerformed
-
-    private void jTextFieldAnoVendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAnoVendidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAnoVendidosActionPerformed
-
-    private void jButtonConfimaEncalhadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfimaEncalhadosActionPerformed
-        String mes = "";
-        String ano = "";
-        String auxEncalhados = "";
-
-        mes = jTextFieldMesEncalhados.getText();
-        ano = jTextFieldAnoEncalhados.getText();
-        auxEncalhados = objPrincipal.getObjCtrImovel().getListaEncalhados(mes, ano);
-
-        jTextAreaEncalhados.setText("Imóveis Encalhados" + "\n" + auxEncalhados);
-    }//GEN-LAST:event_jButtonConfimaEncalhadosActionPerformed
-
-    private void jButtonConfirmaCorretoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmaCorretoresActionPerformed
-        String mes = "";
-        String ano = "";
-        String auxCorretores = "";
-
-        mes = jTextFieldMesCorretores.getText();
-        //ano = jTextFieldAnoCorretores.getText();
-        try {
-            auxCorretores = objPrincipal.getObjACtrCorretor().faturamentoCorretor(mes);
-            jTextAreaFaturaCorretores.setText("Faturamento dos Corretores" + "\n" + auxCorretores);
-        } catch (Exception ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButtonConfirmaCorretoresActionPerformed
-
-    private void jTextFieldMesCorretorePagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMesCorretorePagActionPerformed
-        String mes = "";
-        String ano = "";
-        String auxVendidos = "";
-
-        mes = jTextFieldMesVendidos.getText();
-        ano = jTextFieldAnoVendidos.getText();
-        auxVendidos = objPrincipal.getObjACtrVenda().imprimeListaVendas(mes, ano);
-
-        jTextAreaVendidos.setText("Imóveis Vendidos" + "\n" + auxVendidos);
-    }//GEN-LAST:event_jTextFieldMesCorretorePagActionPerformed
-
-    private void jButtonConfirmaCorretoresPagActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmaCorretoresPagActionPerformed
-        String mes = "";
-        String ano = "";
-        String auxPagCorretores = "";
-
-        mes = jTextFieldMesCorretorePag.getText();
-        ano = jTextFieldAnoCorretoresPag.getText();
-        try {
-            auxPagCorretores = objPrincipal.getObjACtrCorretor().PagamentoCorretores(mes, ano);
-        } catch (Exception ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        jTextAreaCorretoresPag.setText("Pagamento dos Corretores " + "\n" + auxPagCorretores);
-    }//GEN-LAST:event_jButtonConfirmaCorretoresPagActionPerformed
-
-    private void jButtonConfirmaCorretorMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmaCorretorMesActionPerformed
-        String mes = "";
-        String auxCorretorMes = "";
-
-        mes = jTextFieldMesCorretor.getText();
-        auxCorretorMes = objPrincipal.getObjACtrCorretor().corretorDoMes(mes);
-
-        jTextAreaCorretorMes.setText("Corretor do Mês: " + mes + auxCorretorMes);
-    }//GEN-LAST:event_jButtonConfirmaCorretorMesActionPerformed
->>>>>>> master
 
     /**
      * @param args the command line arguments
@@ -2413,18 +1796,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancela3;
     private javax.swing.JButton jButtonCancela4;
     private javax.swing.JButton jButtonCancela5;
-    private javax.swing.JButton jButtonConfimaEncalhados;
     private javax.swing.JButton jButtonConfirma1;
     private javax.swing.JButton jButtonConfirma2;
     private javax.swing.JButton jButtonConfirma3;
     private javax.swing.JButton jButtonConfirma4;
     private javax.swing.JButton jButtonConfirma5;
-    private javax.swing.JButton jButtonConfirmaCorretorMes;
-    private javax.swing.JButton jButtonConfirmaCorretores;
-    private javax.swing.JButton jButtonConfirmaCorretoresPag;
-    private javax.swing.JButton jButtonConfirmaLucro;
-    private javax.swing.JButton jButtonConfirmaVendidos;
-    private javax.swing.JButton jButtonConfirmarFaturamentoImobi;
     private javax.swing.JButton jButtonEditaImovel;
     private javax.swing.JButton jButtonExcluiImovel;
     private javax.swing.JComboBox<String> jComboBoxComissao;
@@ -2455,21 +1831,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -2497,49 +1861,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuLucroImobiliaria;
     private javax.swing.JMenuItem jMenuPagamentoCorretor;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTable jTableImóveis;
-    private javax.swing.JTextArea jTextAreaCorretorMes;
-    private javax.swing.JTextArea jTextAreaCorretoresPag;
-    private javax.swing.JTextArea jTextAreaEncalhados;
-    private javax.swing.JTextArea jTextAreaFaturaCorretores;
-    private javax.swing.JTextArea jTextAreaFaturamentoMes;
-    private javax.swing.JTextArea jTextAreaLucro;
+    private javax.swing.JTextArea jTextAreaFaturamentoImobiliaria;
     private javax.swing.JTextArea jTextAreaSalario;
-    private javax.swing.JTextArea jTextAreaVendidos;
     private javax.swing.JFormattedTextField jTextField1DataCT;
     private javax.swing.JTextField jTextFieldAno;
-    private javax.swing.JTextField jTextFieldAnoCorretoresPag;
-    private javax.swing.JTextField jTextFieldAnoEncalhados;
-    private javax.swing.JTextField jTextFieldAnoFaturamentoImobiliaria;
-    private javax.swing.JTextField jTextFieldAnoLucro;
-    private javax.swing.JTextField jTextFieldAnoVendidos;
     private javax.swing.JTextField jTextFieldCodImovel;
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JFormattedTextField jTextFieldDataVenda;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldMes;
-    private javax.swing.JTextField jTextFieldMesCorretor;
-    private javax.swing.JTextField jTextFieldMesCorretorePag;
-    private javax.swing.JTextField jTextFieldMesCorretores;
-    private javax.swing.JTextField jTextFieldMesEncalhados;
-    private javax.swing.JTextField jTextFieldMesFaturamentoImobiliaria;
-    private javax.swing.JTextField jTextFieldMesLucro;
-    private javax.swing.JTextField jTextFieldMesVendidos;
     private javax.swing.JTextField jTextFieldNameCM;
     private javax.swing.JTextField jTextFieldNameCT;
     private javax.swing.JTextField jTextFieldNewPayment;
