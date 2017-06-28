@@ -7,9 +7,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 public class ctrVenda {
 
@@ -27,12 +30,12 @@ public class ctrVenda {
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(dataVenda);
-
-        if (vendas.add(new Venda(codImovel, valorDaVenda, nomeComprador, data, corretorResponsvel))) {
+        try {
+            vendas.add(new Venda(codImovel, valorDaVenda, nomeComprador, data, corretorResponsvel));
             objPrincipal.objACtrImovel.vendeImovel(codImovel);
             serializaVenda();
-        } else {
-            throw new Exception("Error ao cadastrar venda!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
 
@@ -58,87 +61,134 @@ public class ctrVenda {
         return vendas;
     }
 
-    public String imprimeListaVendas(String pMes, String pAno) {
-        String result = "";
+    public String imprimeListaVendas(String pMes, String pAno) throws Exception {
 
-        for (int idx = 0; idx < vendas.size(); idx++) {
-            Venda objVenda = (Venda) vendas.get(idx);
-            SimpleDateFormat sdfMes = new SimpleDateFormat("MM");
-            String mes = sdfMes.format(objVenda.getDataVenda());
+        if (validaMesAno(pMes, pAno)) {
+            String result = "";
 
-            SimpleDateFormat sdfAnos = new SimpleDateFormat("yyyy");
-            String ano = sdfAnos.format(objVenda.getDataVenda());
+            for (int idx = 0; idx < vendas.size(); idx++) {
+                Venda objVenda = (Venda) vendas.get(idx);
+                SimpleDateFormat sdfMes = new SimpleDateFormat("MM");
+                String mes = sdfMes.format(objVenda.getDataVenda());
 
-            if (mes.equalsIgnoreCase(pMes) && ano.equalsIgnoreCase(pAno)) {
-                Venda objDisc = (Venda) vendas.get(idx);
-                result += "\n"
-                        + "Valor: R$" + objDisc.getValorDaVenda()
-                        + "\nComprador: " + objDisc.getNomeComprador()
-                        + "\nData: " + objDisc.getDataVenda()
-                        + "\nCorretor: " + objDisc.getCorretorResponsavel()
-                        + "\n";
+                SimpleDateFormat sdfAnos = new SimpleDateFormat("yyyy");
+                String ano = sdfAnos.format(objVenda.getDataVenda());
+
+                if (mes.equalsIgnoreCase(pMes) && ano.equalsIgnoreCase(pAno)) {
+                    Venda objDisc = (Venda) vendas.get(idx);
+
+                    DateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+                    String data = formatDate.format(objDisc.getDataVenda());
+
+                    result += "\n"
+                            + "Valor: R$" + objDisc.getValorDaVenda()
+                            + "\nComprador: " + objDisc.getNomeComprador()
+                            + "\nData: " + data
+                            + "\nCorretor: " + objDisc.getCorretorResponsavel()
+                            + "\n";
+                }
+
             }
-
+            return result;
+        } else {
+            throw new Exception("Data inserida é invalida");
         }
-        return result;
     }
 
-    public float calculaFaturamento(String pMes, String pAno) {
+    public float calculaFaturamento(String pMes, String pAno) throws Exception {
         float faturamento = 0;
+        if (validaMesAno(pMes, pAno)) {
+            for (int idx = 0; idx < vendas.size(); idx++) {
+                Venda objVenda = (Venda) vendas.get(idx);
 
-        for (int idx = 0; idx < vendas.size(); idx++) {
-            Venda objVenda = (Venda) vendas.get(idx);
+                SimpleDateFormat sdfMes = new SimpleDateFormat("MM");
+                String mes = sdfMes.format(objVenda.getDataVenda());
 
-            SimpleDateFormat sdfMes = new SimpleDateFormat("MM");
-            String mes = sdfMes.format(objVenda.getDataVenda());
+                SimpleDateFormat sdfAnos = new SimpleDateFormat("yyyy");
+                String ano = sdfAnos.format(objVenda.getDataVenda());
 
-            SimpleDateFormat sdfAnos = new SimpleDateFormat("yyyy");
-            String ano = sdfAnos.format(objVenda.getDataVenda());
-
-            if (mes.equalsIgnoreCase(pMes) && ano.equalsIgnoreCase(pAno)) {
-                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+                if (mes.equalsIgnoreCase(pMes) && ano.equalsIgnoreCase(pAno)) {
+                    faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+                }
             }
-        }
 
-        return faturamento;
+            return faturamento;
+        } else {
+            throw new Exception("Data inserida é invalida");
+        }
     }
 
-    public float calculaFaturamentoCorretor(Corretor objCorretor, String pMes) {
-        float faturamento = 0;
-        String auxCorretor = "";
-        auxCorretor = String.valueOf(objCorretor);
-        for (int idx = 0; idx < vendas.size(); idx++) {
-            Venda objVenda = (Venda) vendas.get(idx);
+    public float calculaFaturamentoCorretor(Corretor objCorretor, String pMes, String pAno) throws Exception {
+        if (validaMesAno(pMes, pAno)) {
+            float faturamento = 0;
+            String auxCorretor = "";
+            auxCorretor = String.valueOf(objCorretor);
+            for (int idx = 0; idx < vendas.size(); idx++) {
+                Venda objVenda = (Venda) vendas.get(idx);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("MM");
-            String mes = sdf.format(objVenda.getDataVenda());
+                SimpleDateFormat sdf = new SimpleDateFormat("MM");
+                String mes = sdf.format(objVenda.getDataVenda());
 
-            if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(auxCorretor)) {
-                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+                if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(auxCorretor)) {
+                    faturamento += (objVenda.getValorDaVenda() * 5) / 100;
 
+                }
             }
-        }
 
-        return faturamento;
+            return faturamento;
+        } else {
+            throw new Exception("Data inserida é invalida");
+        }
     }
 
-    public float calculaValorPagoCorretor(Corretor objCorretor, String pMes) {
-        float faturamento = 0;
-        String auxCorretor = "";
-        auxCorretor = String.valueOf(objCorretor);
-        for (int idx = 0; idx < vendas.size(); idx++) {
-            Venda objVenda = (Venda) vendas.get(idx);
+    public float calculaValorPagoCorretor(Corretor objCorretor, String pMes, String pAno) throws Exception {
+        if (validaMesAno(pMes, pAno)) {
+            float faturamento = 0;
+            String auxCorretor = "";
+            auxCorretor = String.valueOf(objCorretor);
+            for (int idx = 0; idx < vendas.size(); idx++) {
+                Venda objVenda = (Venda) vendas.get(idx);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("MM");
-            String mes = sdf.format(objVenda.getDataVenda());
+                SimpleDateFormat sdf = new SimpleDateFormat("MM");
+                String mes = sdf.format(objVenda.getDataVenda());
 
-            if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(auxCorretor)) {
-                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
-                System.out.println(objVenda.getValorDaVenda());
+                if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(auxCorretor)) {
+                    faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+                    System.out.println(objVenda.getValorDaVenda());
+                }
             }
+
+            return faturamento;
+        } else {
+            throw new Exception("Data inserida é invalida");
+        }
+    }
+
+    public boolean validaMesAno(String pMes, String pAno) {
+        int mes = Integer.parseInt(pMes);
+        int ano = Integer.parseInt(pAno);
+
+        System.out.println(mes);
+        System.out.println(ano);
+        
+        GregorianCalendar dtA = new GregorianCalendar();
+        dtA.setTime(new Date());
+
+        int month = 1 + dtA.get(GregorianCalendar.MONTH);
+        int year = dtA.get(GregorianCalendar.YEAR);
+        
+        System.out.println(month);
+        System.out.println(year);
+        
+        if (mes > month && ano == year) {
+            return false;
+        } else if (ano > year) {
+            return false;
+        } else if (mes > 1 && mes < 12) {
+            return true;
         }
 
-        return faturamento;
+    return true;
     }
 
     public void finalize() throws Exception {

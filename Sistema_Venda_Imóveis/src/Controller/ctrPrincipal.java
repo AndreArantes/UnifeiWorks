@@ -53,7 +53,7 @@ public class ctrPrincipal {
         return objACtrCorretor.buscaCorretor(nome);
     }
     
-    public float calculaSalario(Corretor objCorretor, String pMes,String pAno){
+    public float calculaSalario(Corretor objCorretor, String pMes,String pAno) throws Exception{
         return objACtrCorretor.calculaSalario(objCorretor, pMes, pAno);
     }
 
