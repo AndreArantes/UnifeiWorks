@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -329,7 +331,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tipo", "Código", "Descrição", "Proprietário", "Valor", "Data do Cadastro"
+                "Tipo", "Código", "Descrição", "Proprietário", "Valor R$", "Data do Cadastro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -338,6 +340,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableImóveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableImóveisMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(jTableImóveis);
@@ -530,31 +537,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
         CadastroCorretorCTLayout.setHorizontalGroup(
             CadastroCorretorCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(CadastroCorretorCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroCorretorCTLayout.createSequentialGroup()
-                        .addContainerGap(472, Short.MAX_VALUE)
+                        .addGap(0, 466, Short.MAX_VALUE)
                         .addComponent(jButtonConfirma2)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCancela2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(CadastroCorretorCTLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1DataCT))
-                            .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNameCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
-                            .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumberCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
-                            .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldSalCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)))))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1DataCT))
+                    .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNameCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                    .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNumberCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE))
+                    .addGroup(CadastroCorretorCTLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldSalCT, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -728,6 +733,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         TelaPrincipal.add(CalculaSalario, "TelaCalculaSalario");
 
         jLabel17.setText("Corretores:");
+
+        jComboBoxCorretoresCT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCorretoresCTActionPerformed(evt);
+            }
+        });
 
         jLabel18.setText("Novo Valor:");
 
@@ -1159,8 +1170,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jTextFieldValorVenda.setText("");
         jTextFieldDataVenda.setText("");
 
-        String[] listaCorretores = new String[corretores.size()];
-        int idx = 0;
+        String[] listaCorretores = new String[corretores.size() + 1];
+        listaCorretores[0] = "ESCOLHA UM CORRETOR";
+        int idx = 1;
 
         for (Corretor c : corretores) {
             listaCorretores[idx] = c.getNome();
@@ -1228,7 +1240,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (jTextFieldCodImovel.getText().equalsIgnoreCase("") || jTextFieldValorVenda.getText().equalsIgnoreCase("")
-                || jTextFieldNomeComprador.getText().equalsIgnoreCase("") || jTextFieldDataVenda.getText().equalsIgnoreCase("  /  /    ")) {
+                || jTextFieldNomeComprador.getText().equalsIgnoreCase("") || jTextFieldDataVenda.getText().equalsIgnoreCase("  /  /    ")
+                || jComboBoxCorretorResponsavel.getSelectedIndex() == 0) {
 
             JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente");
 
@@ -1276,23 +1289,35 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonConfirma2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma2ActionPerformed
         // TODO add your handling code here:
-        String nameCT = jTextFieldNameCT.getText();
-        String nCreciCT = jTextFieldNumberCT.getText();
-        float salarioCT = Float.parseFloat(jTextFieldSalCT.getText());
-        String dataCT = jTextField1DataCT.getText();
+        if (jTextFieldNameCT.getText().equalsIgnoreCase("") || jTextFieldNumberCT.getText().equalsIgnoreCase("")
+                || jTextFieldSalCT.getText().equalsIgnoreCase("") || jTextField1DataCT.getText().equalsIgnoreCase("")) {
+            
+            JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente");
+            
+            jTextFieldNameCT.setText("");
+            jTextFieldNumberCT.setText("");
+            jTextFieldSalCT.setText("");
+            jTextField1DataCT.setText("");
+            
+        } else {
+            
+            String nameCT = jTextFieldNameCT.getText();
+            String nCreciCT = jTextFieldNumberCT.getText();
+            float salarioCT = Float.parseFloat(jTextFieldSalCT.getText());
+            String dataCT = jTextField1DataCT.getText();
 
-        try {
-            objPrincipal.cadCorretorCT(nameCT, nCreciCT, salarioCT, dataCT);
-            JOptionPane.showMessageDialog(this, "Corretor contratado cadastrado com sucesso!");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex);
+            try {
+                objPrincipal.cadCorretorCT(nameCT, nCreciCT, salarioCT, dataCT);
+                JOptionPane.showMessageDialog(this, "Corretor contratado cadastrado com sucesso!");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+
+            jTextFieldNameCT.setText("");
+            jTextFieldNumberCT.setText("");
+            jTextFieldSalCT.setText("");
+            jTextField1DataCT.setText("");
         }
-
-        jTextFieldNameCT.setText("");
-        jTextFieldNumberCT.setText("");
-        jTextFieldSalCT.setText("");
-        jTextField1DataCT.setText("");
-
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaCadastroCT");
     }//GEN-LAST:event_jButtonConfirma2ActionPerformed
@@ -1311,20 +1336,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonConfirma3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma3ActionPerformed
         // TODO add your handling code here:
-        String nameCM = jTextFieldNameCM.getText();
-        String nCreciCM = jTextFieldNumberCM.getText();
-        float comissionCM = (float) (1 + (jComboBoxComissao.getSelectedIndex())) / 100;
+        if (jTextFieldNameCM.getText().equalsIgnoreCase("") || jTextFieldNumberCM.getText().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente");
+            jTextFieldNameCM.setText("");
+            jTextFieldNumberCM.setText("");
+            jComboBoxComissao.setSelectedIndex(0);
+        } else {
+            String nameCM = jTextFieldNameCM.getText();
+            String nCreciCM = jTextFieldNumberCM.getText();
+            float comissionCM = (float) (1 + (jComboBoxComissao.getSelectedIndex())) / 100;
 
-        try {
-            objPrincipal.cadCorretorCM(nameCM, nCreciCM, comissionCM);
-            JOptionPane.showMessageDialog(this, "Corretor comissionado cadastrado com sucesso!");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex);
+            try {
+                objPrincipal.cadCorretorCM(nameCM, nCreciCM, comissionCM);
+                JOptionPane.showMessageDialog(this, "Corretor comissionado cadastrado com sucesso!");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+
+            jTextFieldNameCM.setText("");
+            jTextFieldNumberCM.setText("");
+            jComboBoxComissao.setSelectedIndex(0);
         }
-
-        jTextFieldNameCM.setText("");
-        jTextFieldNumberCM.setText("");
-        jComboBoxComissao.setSelectedIndex(0);
 
         CardLayout card = (CardLayout) TelaPrincipal.getLayout();
         card.show(TelaPrincipal, "TelaCadastroCM");
@@ -1356,7 +1388,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jTextFieldNewPayment.setText("");
 
         ArrayList<Contratado> contratados = new ArrayList<Contratado>();
-        int idx = 0;
+        int idx = 1;
 
         for (Corretor c : corretores) {
 
@@ -1366,7 +1398,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         }
 
-        String[] listaCorretores = new String[contratados.size()];
+        String[] listaCorretores = new String[contratados.size() + 1];
+        listaCorretores [0] = "ESCOLHA UM CORRETOR";
 
         for (Contratado ct : contratados) {
             listaCorretores[idx] = ct.getNome();
@@ -1413,8 +1446,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         ArrayList<Comissionado> comissionados = new ArrayList<Comissionado>();
 
-        int idx = 0;
-
         for (Corretor c : corretores) {
 
             if (c instanceof Comissionado) {
@@ -1423,8 +1454,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         }
 
-        String[] listaCorretores = new String[comissionados.size()];
-
+        String[] listaCorretores = new String[comissionados.size()  + 1];
+        listaCorretores[0] = "SELECIONE UM CORRETOR";
+        int idx = 1;
+         
         for (Comissionado ct : comissionados) {
             listaCorretores[idx] = ct.getNome();
             idx++;
@@ -1442,8 +1475,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (jTextFieldNewPayment.getText().equalsIgnoreCase("") || jTextFieldNewPayment.getText().equalsIgnoreCase("Error campo novo salário vazio!")
-                || jTextFieldNewPayment.getText().equalsIgnoreCase("Salario alterado com sucesso!")) {
-            jTextFieldNewPayment.setText("Error campo novo salário vazio!");
+                || jTextFieldNewPayment.getText().equalsIgnoreCase("Salario alterado com sucesso!") || jComboBoxCorretoresCT.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente");
+            jTextFieldNewPayment.setText("");
             jComboBoxCorretoresCT.setSelectedIndex(0);
         } else {
             String corretor = jComboBoxCorretoresCT.getItemAt(jComboBoxCorretoresCT.getSelectedIndex());
@@ -1472,7 +1506,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonConfirma5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirma5ActionPerformed
         // TODO add your handling code here:
+        
+        if(jComboBoxCorretoresCM.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente");
+            jComboBoxCorretoresCM.setSelectedIndex(0); 
+        } else {
         String corretor = jComboBoxCorretoresCM.getItemAt(jComboBoxCorretoresCM.getSelectedIndex());
+        
         float nova_comissao = (float) (jComboBoxNewComission.getSelectedIndex() + 1) / 100;
 
         Corretor cor = objPrincipal.buscaCorretor(corretor);
@@ -1481,11 +1521,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         try {
             objPrincipal.getObjACtrCorretor().serializaCorretor();
+            JOptionPane.showMessageDialog(this, "Comissão alterada com sucesso");
         } catch (Exception ex) {
-
+            JOptionPane.showMessageDialog(this, ex);
+        }       
+        
         }
-
-        JOptionPane.showMessageDialog(this, "Comissão alterado com sucesso");
+        
+        jComboBoxCorretoresCT.setSelectedIndex(0);
+        
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaAlteraComissao");
     }//GEN-LAST:event_jButtonConfirma5ActionPerformed
 
     private void jMenuLucroImobiliariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuLucroImobiliariaActionPerformed
@@ -1634,7 +1680,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     i.getCodigo(),
                     i.getDescricao(),
                     i.getNomeProprietario(),
-                    "R$" + i.getValorRequerido(),
+                    i.getValorRequerido(),
                     data
 
                 });
@@ -1644,6 +1690,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonEditaImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditaImovelActionPerformed
         // TODO add your handling code here:
+        if (jTableImóveis.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Nenhum imovel foi selecionado!");
+        } else {
+            try {
+                Imovel imv = objPrincipal.getObjCtrImovel().buscaImovel((String) jTableImóveis.getValueAt(jTableImóveis.getSelectedRow(), 1));
+                imv.setDescricao((String) jTableImóveis.getValueAt(jTableImóveis.getSelectedRow(), 2));
+                imv.setNomeProprietario((String) jTableImóveis.getValueAt(jTableImóveis.getSelectedRow(), 3));
+                imv.setValorRequerido((float) Float.parseFloat(jTableImóveis.getValueAt(jTableImóveis.getSelectedRow(), 4).toString()));
+                objPrincipal.getObjCtrImovel().serializaImovel();
+                JOptionPane.showMessageDialog(this, "Imóvel editado com sucesso!");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+
+        }
+
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaBusca");
     }//GEN-LAST:event_jButtonEditaImovelActionPerformed
 
     private void jButtonExcluiImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluiImovelActionPerformed
@@ -1652,13 +1716,29 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nenhum imovel foi selecionado!");
         } else {
             DefaultTableModel tableImoveis = (DefaultTableModel) jTableImóveis.getModel();
+            try {
+                objPrincipal.getObjCtrImovel().vendeImovel((String) jTableImóveis.getValueAt(jTableImóveis.getSelectedRow(), 1));
+                JOptionPane.showMessageDialog(this, "Imóvel removido com sucesso!");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
             tableImoveis.removeRow(jTableImóveis.getSelectedRow());
         }
+
+        CardLayout card = (CardLayout) TelaPrincipal.getLayout();
+        card.show(TelaPrincipal, "TelaBusca");
     }//GEN-LAST:event_jButtonExcluiImovelActionPerformed
 
+    private void jTableImóveisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableImóveisMouseClicked
+    }//GEN-LAST:event_jTableImóveisMouseClicked
+
+    private void jComboBoxCorretoresCTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCorretoresCTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxCorretoresCTActionPerformed
+
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

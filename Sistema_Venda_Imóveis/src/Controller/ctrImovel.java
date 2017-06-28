@@ -32,14 +32,32 @@ public class ctrImovel {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(pData);
         
-        if(Imoveis.add(new Imovel(tipo, cod, descricao, nomeProprietario, valor, data))){
+        try{
+            Imoveis.add(new Imovel(tipo, cod, descricao, nomeProprietario, valor, data));
             serializaImovel();
-        } else{
-           throw new Exception("Error ao cadastrar imóvel!");     
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
         }    
         
     }
 
+    public Imovel buscaImovel(String codImovel) throws Exception {
+ 
+        
+            for (int idx = 0; idx < Imoveis.size(); idx++) {
+
+                Imovel objImovel = (Imovel) Imoveis.get(idx);
+
+                if(objImovel.getCodigo().equalsIgnoreCase(codImovel)){
+
+                    return objImovel;                
+                } 
+                
+            }
+
+    throw new Exception("Imovel não encontrado!");    
+    }
+        
     public void vendeImovel(String codImovel) throws Exception {
         
         boolean testa = true;
@@ -71,7 +89,7 @@ public class ctrImovel {
             }          
     }
 
-    private void serializaImovel() throws Exception {
+    public void serializaImovel() throws Exception {
         FileOutputStream objFileOS = new FileOutputStream("imoveis.dat");
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
         objOS.writeObject(Imoveis);
@@ -79,7 +97,7 @@ public class ctrImovel {
         objOS.close();
     }
 
-    private void desserializaImovel() throws Exception {
+    public void desserializaImovel() throws Exception {
         File objFile = new File("imoveis.dat");
         if (objFile.exists()) {
             FileInputStream objFileIS = new FileInputStream("imoveis.dat");
