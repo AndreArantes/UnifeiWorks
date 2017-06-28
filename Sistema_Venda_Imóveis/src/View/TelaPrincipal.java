@@ -1568,7 +1568,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 || jTextFieldDescricao.getText().equalsIgnoreCase("") || jTextFieldNomeProprietario.getText().equalsIgnoreCase("")
                 || jTextFieldValor.getText().equalsIgnoreCase("") || jFormattedTextFieldData.getText().equalsIgnoreCase("")) {
 
-            JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente!");
+            JOptionPane.showMessageDialog(this, "Algum campo não foi preenchido corretamente");
 
             jTextFieldCodigo.setText("");
             jComboBoxTipoImovel.setSelectedIndex(0);
