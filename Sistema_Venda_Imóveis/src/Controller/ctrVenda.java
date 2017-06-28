@@ -17,17 +17,17 @@ public class ctrVenda {
     private Vector<Venda> vendas = new Vector<Venda>();
 
     public ctrVenda(ctrPrincipal pCtr) throws Exception {
-        
+
         objPrincipal = pCtr;
         desserializaVenda();
-        
+
     }
 
     public void cadVenda(String codImovel, float valorDaVenda, String nomeComprador, String dataVenda, String corretorResponsvel) throws Exception {
-        
+
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(dataVenda);
- 
+
         if (vendas.add(new Venda(codImovel, valorDaVenda, nomeComprador, data, corretorResponsvel))) {
             objPrincipal.objACtrImovel.vendeImovel(codImovel);
             serializaVenda();
@@ -58,48 +58,44 @@ public class ctrVenda {
         return vendas;
     }
 
-    public String imprimeListaVendas() {
+    public String imprimeListaVendas(String pMes, String pAno) {
         String result = "";
 
         for (int idx = 0; idx < vendas.size(); idx++) {
-            Venda objDisc = (Venda) vendas.get(idx);
-            result += "Valor: R$" + objDisc.getValorDaVenda()
-                    + "\nComprador: " + objDisc.getNomeComprador()
-                    + "\nData: " + objDisc.getDataVenda()
-                    + "\nCorretor: " + objDisc.getCorretorResponsavel()
-                    + "\n";
-        }
-        
-    return result;    
-    }
-
-    public float calculaFaturamento(String pMes) {
-        float faturamento = 0;
-
-        for (int idx = 0; idx < vendas.size(); idx++) {
             Venda objVenda = (Venda) vendas.get(idx);
+            SimpleDateFormat sdfMes = new SimpleDateFormat("MM");
+            String mes = sdfMes.format(objVenda.getDataVenda());
 
-            SimpleDateFormat sdf = new SimpleDateFormat("MM");
-            String mes = sdf.format(objVenda.getDataVenda());
+            SimpleDateFormat sdfAnos = new SimpleDateFormat("yyyy");
+            String ano = sdfAnos.format(objVenda.getDataVenda());
 
-            if (mes.equalsIgnoreCase(pMes)) {
-                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+            if (mes.equalsIgnoreCase(pMes) && ano.equalsIgnoreCase(pAno)) {
+                Venda objDisc = (Venda) vendas.get(idx);
+                result += "\n"
+                        + "Valor: R$" + objDisc.getValorDaVenda()
+                        + "\nComprador: " + objDisc.getNomeComprador()
+                        + "\nData: " + objDisc.getDataVenda()
+                        + "\nCorretor: " + objDisc.getCorretorResponsavel()
+                        + "\n";
             }
+
         }
-        
-    return faturamento;
+        return result;
     }
 
-    public float calculaFaturamentoCorretor(Corretor objCorretor, String pMes) {
+    public float calculaFaturamento(String pMes, String pAno) {
         float faturamento = 0;
 
         for (int idx = 0; idx < vendas.size(); idx++) {
             Venda objVenda = (Venda) vendas.get(idx);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("MM");
-            String mes = sdf.format(objVenda.getDataVenda());
+            SimpleDateFormat sdfMes = new SimpleDateFormat("MM");
+            String mes = sdfMes.format(objVenda.getDataVenda());
 
-            if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(objCorretor)) {
+            SimpleDateFormat sdfAnos = new SimpleDateFormat("yyyy");
+            String ano = sdfAnos.format(objVenda.getDataVenda());
+
+            if (mes.equalsIgnoreCase(pMes) && ano.equalsIgnoreCase(pAno)) {
                 faturamento += (objVenda.getValorDaVenda() * 5) / 100;
             }
         }
@@ -107,6 +103,43 @@ public class ctrVenda {
         return faturamento;
     }
 
+    public float calculaFaturamentoCorretor(Corretor objCorretor, String pMes) {
+        float faturamento = 0;
+        String auxCorretor = "";
+        auxCorretor = String.valueOf(objCorretor);
+        for (int idx = 0; idx < vendas.size(); idx++) {
+            Venda objVenda = (Venda) vendas.get(idx);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("MM");
+            String mes = sdf.format(objVenda.getDataVenda());
+            
+            if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(auxCorretor)) {
+                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+                System.out.println(objVenda.getValorDaVenda());
+            }
+        }
+
+        return faturamento;
+    }
+    
+    public float calculaValorPagoCorretor(Corretor objCorretor, String pMes) {
+        float faturamento = 0;
+        String auxCorretor = "";
+        auxCorretor = String.valueOf(objCorretor);
+        for (int idx = 0; idx < vendas.size(); idx++) {
+            Venda objVenda = (Venda) vendas.get(idx);
+
+            SimpleDateFormat sdf = new SimpleDateFormat("MM");
+            String mes = sdf.format(objVenda.getDataVenda());
+            
+            if (mes.equalsIgnoreCase(pMes) && objVenda.getCorretorResponsavel().equals(auxCorretor)) {
+                faturamento += (objVenda.getValorDaVenda() * 5) / 100;
+                System.out.println(objVenda.getValorDaVenda());
+            }
+        }
+
+        return faturamento;
+    }
 
     public void finalize() throws Exception {
         serializaVenda();
