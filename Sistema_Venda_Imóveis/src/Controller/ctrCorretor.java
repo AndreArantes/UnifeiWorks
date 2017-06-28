@@ -20,41 +20,39 @@ public class ctrCorretor {
     private Vector corretores = new Vector();
 
     public ctrCorretor(ctrPrincipal pCtr) throws Exception {
-        
+
         objCtrPrincipal = pCtr;
         listaVendas = objCtrPrincipal.objACtrVenda.getListaVendas();
         desserializaCorretor();
-        
+
     }
 
-    public void cadCorretorCT(String nome, String CRECI, float salariofixo, String pData) throws Exception{
-        
+    public void cadCorretorCT(String nome, String CRECI, float salariofixo, String pData) throws Exception {
+
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(pData);
-        
-        if(corretores.add(new Contratado(nome, CRECI, salariofixo, data))){
+
+        if (corretores.add(new Contratado(nome, CRECI, salariofixo, data))) {
             serializaCorretor();
         } else {
             throw new Exception("Error ao cadastrar corretor contratado!");
         }
-                 
+
     }
-    
-    public void cadCorretorCM(String nome, String CRECI, float comissao) throws Exception{
-         
-        if(corretores.add(new Comissionado(nome, CRECI, comissao))){
-           serializaCorretor();
+
+    public void cadCorretorCM(String nome, String CRECI, float comissao) throws Exception {
+
+        if (corretores.add(new Comissionado(nome, CRECI, comissao))) {
+            serializaCorretor();
         } else {
             throw new Exception("Error ao cadastrar corretor comissionado!");
         }
     }
 
-
     public Vector getListaCorretor() {
         return corretores;
     }
 
-    
     public void serializaCorretor() throws Exception {
         FileOutputStream objFileOS = new FileOutputStream("corretores.dat");
         ObjectOutputStream objOS = new ObjectOutputStream(objFileOS);
@@ -71,38 +69,36 @@ public class ctrCorretor {
             corretores = (Vector) objIS.readObject();
             objIS.close();
         }
-    }    
-    
-    
-    public Corretor buscaCorretor(String nomeCorretor){
-        
-        for(int idx = 0; idx<corretores.size(); idx++){
+    }
+
+    public Corretor buscaCorretor(String nomeCorretor) {
+
+        for (int idx = 0; idx < corretores.size(); idx++) {
             Corretor objCorretor = (Corretor) corretores.get(idx);
-            
-            if(objCorretor.getNome().equalsIgnoreCase(nomeCorretor)){
+
+            if (objCorretor.getNome().equalsIgnoreCase(nomeCorretor)) {
                 return objCorretor;
             }
         }
-        
-    return null;   
+
+        return null;
     }
-    
-    
+
     public float calculaSalario(Corretor objCorretor, String pMes, String pAno) {
-        
+
         float salario = 0;
 
         if (objCorretor instanceof Contratado) {
 
             for (int idx = 0; idx < listaVendas.size(); idx++) {
                 Venda objVenda = (Venda) listaVendas.get(idx);
-                
+
                 SimpleDateFormat sdfM = new SimpleDateFormat("MM");
                 String mes = sdfM.format(objVenda.getDataVenda());
-                
+
                 SimpleDateFormat sdfY = new SimpleDateFormat("yyyy");
                 String ano = sdfY.format(objVenda.getDataVenda());
-                
+
                 if (objCorretor.getNome().equalsIgnoreCase(objVenda.getCorretorResponsavel()) && mes.equalsIgnoreCase(pMes)
                         && ano.equalsIgnoreCase(pAno)) {
                     salario += (float) objVenda.getValorDaVenda() * ((Contratado) objCorretor).getPercentualVenda();
@@ -116,7 +112,7 @@ public class ctrCorretor {
 
                 SimpleDateFormat sdf = new SimpleDateFormat("MM");
                 String mes = sdf.format(objVenda.getDataVenda());
-                
+
                 SimpleDateFormat sdfY = new SimpleDateFormat("yyyy");
                 String ano = sdfY.format(objVenda.getDataVenda());
 
@@ -130,20 +126,19 @@ public class ctrCorretor {
         return salario;
     }
 
-    public float calculaLucro(String pMes) {
+    public float calculaLucro(String pMes, String pAno) {
         float lucro = 0;
-        Date dataAtual = new Date();
-        
-        SimpleDateFormat sdfY = new SimpleDateFormat("yyyy");
-        String ano = sdfY.format(dataAtual);
-        
+
         for (int idx = 0; idx < listaVendas.size(); idx++) {
             Venda objVenda = (Venda) listaVendas.get(idx);
 
             SimpleDateFormat sdf = new SimpleDateFormat("MM");
             String mes = sdf.format(objVenda.getDataVenda());
 
-            if (mes.equalsIgnoreCase(pMes)) {
+            SimpleDateFormat sdfY = new SimpleDateFormat("yyyy");
+            String ano = sdfY.format(objVenda.getDataVenda());
+
+            if (mes.equalsIgnoreCase(pMes) && ano.equalsIgnoreCase(pAno)) {
                 lucro += (objVenda.getValorDaVenda() * 5) / 100;
             }
         }
@@ -151,19 +146,19 @@ public class ctrCorretor {
         for (int idx = 0; idx < corretores.size(); idx++) {
             Corretor objCorretor = (Corretor) corretores.get(idx);
 
-            lucro -= calculaSalario(objCorretor, pMes, ano);
+            lucro -= calculaSalario(objCorretor, pMes, pAno);
 
         }
 
-    return lucro;
+        return lucro;
     }
-        
-    public Corretor corretorDoMes(String pMes) throws Exception {
+
+    public String corretorDoMes(String pMes) {
         Date dataAtual = new Date();
-        
+
         SimpleDateFormat sdfY = new SimpleDateFormat("yyyy");
         String ano = sdfY.format(dataAtual);
-        
+
         Corretor objCorretorDoMes = (Corretor) corretores.get(0);
         float comissao = 0;
         float testa_comissao = 0;
@@ -198,35 +193,65 @@ public class ctrCorretor {
             }
 
         }
-        return objCorretorDoMes;
+        return  "\n"
+                + "Nome: " + objCorretorDoMes.getNome()
+                + " || CRECI: " + objCorretorDoMes.getNumCRECI()
+                + "\n";
     }
-    
 
     public String faturamentoCorretor(String pMes) throws Exception {
         desserializaCorretor();
-        
+
         String result = " ";
 
         for (int idx = 0; idx < corretores.size(); idx++) {
             Corretor objCorretor = (Corretor) corretores.get(idx);
-            result += "Nome: " + objCorretor.getNome()
+
+            result += "\n"
+                    + "Nome: " + objCorretor.getNome()
                     + " || CRECI: " + objCorretor.getNumCRECI()
                     + " || Faturamento trazido: R$" + objCtrPrincipal.getObjACtrVenda().calculaFaturamentoCorretor(objCorretor, pMes)
                     + "\n";
         }
 
         if (result.equalsIgnoreCase("")) {
-            
+
             return "Error! Não existem Corretores cadastrados.";
-            
+
         } else {
-            
+
             return result;
-            
+
         }
     }
-    
-   public void finalize() throws Exception {
+
+    public String PagamentoCorretores(String pMes, String pAno) throws Exception {
+        desserializaCorretor();
+
+        String result = " ";
+
+        for (int idx = 0; idx < corretores.size(); idx++) {
+            Corretor objCorretor = (Corretor) corretores.get(idx);
+
+            result += "\n"
+                    + "Nome: " + objCorretor.getNome()
+                    + " || CRECI: " + objCorretor.getNumCRECI()
+                    + " || Valor Pago: R$" + objCtrPrincipal.getObjACtrCorretor().calculaSalario(objCorretor, pMes, pAno)
+                    + "\n";
+        }
+
+        if (result.equalsIgnoreCase("")) {
+
+            return "Error! Não existem Corretores cadastrados.";
+
+        } else {
+
+            return result;
+
+        }
+    }
+
+    public void finalize() throws Exception {
         serializaCorretor();
     }
 }
